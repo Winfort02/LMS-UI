@@ -1,0 +1,153 @@
+
+<p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="!isComponentShown"></p-progressBar>
+<div class="container w-full" *ngIf="isComponentShown">
+  <div class="grid">
+    <div class="col-11 mx-auto flex flex-column gap-3 justify-content-center align-items-center">
+      <div class="col-12 flex flex-row">
+        <div class="col-6 flex justify-content-start align-items-center">
+          <span class="font-bold text-primary"> USER DETAIL </span>
+        </div>
+        <div class="col-6 flex flex-row justify-content-end align-items-center gap-1">
+          <button pButton class="p-button-sm p-button-raised" label="Save" [disabled]="userForm.invalid" (click)="save()"></button>
+          <button pButton class="p-button-sm p-button-raised p-button-danger" label="Close" (click)="close()"></button>
+        </div>
+      </div>
+      <div class="col-12 flex-column flex-column gap-3 justify-content-center align-items-center">
+        <form [formGroup]="userForm">
+          <div class="col-12 flex flex-row justify-content-end align-items-center gap-1">
+            <div class="col-4">
+              <span class="p-float-label">
+                <input type="text" formControlName="name" name="name" class="outline-none w-full" [ngClass]="{'ng-invalid ng-dirty' : (userForm.controls.name.touched && userForm.controls.name.invalid )}" required pInputText /> 
+                <label for="float-input">Full Name</label>
+              </span>
+            </div>
+
+            <div class="col-4">
+              <span class="p-float-label">
+                <input type="text" formControlName="username" name="username" class="outline-none w-full" [ngClass]="{'ng-invalid ng-dirty' : (userForm.controls.username.touched && userForm.controls.username.invalid )}" required pInputText /> 
+                <label for="float-input">Username</label>
+              </span>
+            </div>
+
+            <div class="col-4">
+              <span class="p-float-label">
+                <p-dropdown [options]="user_types" formControlName="user_type" name="user_type" optionLabel="label" optionValue="value" styleClass="w-full"></p-dropdown>
+                <label for="float-input">User Type</label>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12 flex flex-row justify-content-end align-items-center gap-1">
+            <div class="col-4">
+              <span class="p-float-label">
+                <input type="text" formControlName="email" name="email" class="outline-none w-full" [ngClass]="{'ng-invalid ng-dirty' : (userForm.controls.email.touched && userForm.controls.email.invalid )}" required pInputText /> 
+                <label for="float-input">Email </label>
+              </span>
+            </div>
+
+            <div class="col-4">
+              <span class="p-float-label">
+                <input type="password" formControlName="password" name="password" class="outline-none w-full" [ngClass]="{'ng-invalid ng-dirty' : (userForm.controls.password.touched && userForm.controls.password.invalid )}" required pInputText /> 
+                <label for="float-input">Password</label>
+              </span>
+            </div>
+
+            <div class="col-4">
+              <span class="p-float-label">
+                <input type="password" formControlName="password_confirmation" name="password_confirmation" class="outline-none w-full" [ngClass]="{'ng-invalid ng-dirty' : (userForm.controls.password_confirmation.touched && userForm.controls.password_confirmation.invalid )}" required pInputText /> 
+                <label for="float-input">Confirm Password</label>
+              </span>
+            </div>
+          </div>
+          <div class="col-12 flex justify-content-start aling-items-center">
+            <div class="col-12 px-2">
+              <p-checkbox formControlName="is_active" name="is_active" [binary]="true" inputId="binary"></p-checkbox>
+              <label for="binary" class="p-1"> {{ userForm.value.is_active == true ? 'Active' : 'Deactive' }}</label> 
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="col-12 px-5 py-4 mt-5" *ngIf="user.id">
+      <p-tabView class="w-full">
+        <p-tabPanel header="LOGS">
+          <app-user-log [user]="user"></app-user-log>
+        </p-tabPanel>
+        <p-tabPanel header="TRANSACTIONS">
+          <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
+            <div class="col-12 flex flex-column sm:flex-column md:flex-row lg:flex-row xl:flex-row flex-wrap row-gap-3">
+              <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+                <span class="p-float-label">
+                  <p-calendar inputId="basic" (onSelect)="onSelectDate()" [(ngModel)]="start_date"
+                    styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" ></p-calendar>
+                  <label for="inputtext" class="p-text-sm">START DATE </label>
+                </span>
+              </div>
+              <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+                <span class="p-float-label">
+                  <p-calendar inputId="basic" (onSelect)="onSelectDate()" [(ngModel)]="end_date"
+                    styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" ></p-calendar>
+                  <label for="inputtext" class="p-text-sm">END DATE </label>
+                </span>
+              </div>
+              <div class="col-12 sm:col-12 md:col-4 lg:col-4 xl:col-4">
+                <div class="p-inputgroup">
+                  <input type="text" class="p-inputtext-sm" [(ngModel)]="keywords" pInputText placeholder="Search...">   
+                  <button pButton type="button" class="p-button-sm p-button-raised" icon="pi pi-search" (click)="search()"></button>      
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <p-table [value]="sales_orders" (onLazyLoad)="showAllSalesOrder($event)" [loading]="loading" [lazy]="true"
+            [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll">
+              <ng-template pTemplate="header">
+                  <tr class="text-sm">
+                      <th pResizableColumn style="text-align: center; width: 5%;">No</th>
+                      <th pResizableColumn>Sales Order No.</th>
+                      <th pResizableColumn>Transaction No</th>
+                      <th pResizableColumn>Customer</th>
+                      <th pResizableColumn>Date</th>
+                      <th pResizableColumn>Amount</th>
+                      <th pResizableColumn>Payment Type</th>
+                      <th pResizableColumn>Order Status</th>
+                      <th pResizableColumn>Payment Status</th>
+                      <th pResizableColumn>Created By</th>
+                      <th pResizableColumn style="width: 15%;">Created Date</th>
+                      <th pResizableColumn style="text-align: center; width: 5%;">Print</th>
+                      <th pResizableColumn style="text-align: center; width: 5%;" *ngIf="current_user.id === user.id">Update</th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-order let-i="rowIndex">
+                  <tr class="text-xs"  [ngClass]="{'bg-red-600' : order.order_status == 'Cancel'}">
+                      <td> {{ i + 1 }}</td>
+                      <td>{{order.sales_order_number }}</td>
+                      <td>{{order.transaction_number }}</td>
+                      <td>{{order.customer?.customer_name }}</td>
+                      <td>{{order.sales_date }}</td>
+                      <td class="text-right">{{order.total_amount | currency: 'P ' }}</td>
+                      <td>{{order.payment_type }}</td>
+                      <td>{{order.order_status }}</td>
+                      <td [ngClass]="{'text-red-600' : !order.status}" class="text-teal-500">{{order.status == 1 ? 'Paid' : 'Pending' }}</td>
+                      <td>{{order.user?.name  }}</td>
+                      <td>{{order.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+                      <td><button pButton type="button" label="Print" (click)="viewReceipt(order)" icon="pi pi-print" class="p-button-text p-button-success p-button-sm text-xs"></button></td>
+                      <td *ngIf="current_user.id === user.id"><button pButton type="button" label="Update" (click)="updateSalesOrder(order)" icon="pi pi-pencil" class="p-button-text p-button-primary p-button-sm text-xs"></button></td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          <div class="col-12">
+            <button pButton pRipple type="button" label="<<" class="p-button-text paginator" id="firstPage" (click)="firstPage()"></button>
+            <button pButton pRipple type="button" label="<" class="p-button-text paginator" id="prevPage" (click)="prevPage()"></button>
+            <button pButton pRipple type="button" [label]="page_detail" class="p-button-text paginator" disabled></button>
+            <button pButton pRipple type="button" label=">" class="p-button-text paginator" id="nextPage" (click)="nextPage()"></button>
+            <button pButton pRipple type="button" label=">>" class="p-button-text paginator" id="lastPage" (click)="lastPage()"></button>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>
+

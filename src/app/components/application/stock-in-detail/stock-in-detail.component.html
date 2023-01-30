@@ -1,0 +1,130 @@
+
+<p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="!isComponentShown"></p-progressBar>
+<div class="container w-full" *ngIf="isComponentShown">
+  <div class="grid">
+    <div class="col-11 mx-auto flex flex-column gap-3 justify-content-center align-items-center">
+      <div class="col-12 flex flex-row">
+        <div class="col-6 flex justify-content-start align-items-center">
+          <span class="font-bold text-primary"> STOCK IN DETAIL </span>
+        </div>
+        <div class="col-6 flex flex-row justify-content-end align-items-center gap-1">
+          <button pButton class="p-button-sm p-button-raised" label="Save" (click)="save()"></button>
+          <button pButton class="p-button-sm p-button-raised p-button-danger" label="Close" (click)="close()"></button>
+        </div>
+      </div>
+      <form [formGroup]="stock_in_form" class="col-12 flex flex-column justify-content-center align-items-center gap-3">
+        <div class="col-12 surface-hover border-round flex flex-row justify-content-start align-items-center py-5">
+          <div class="col-4">
+            <span class="p-float-label">
+              <p-dropdown [options]="suppliers" formControlName="supplier_id" name="supplier_id" [filter]="true" filterBy="supplier_name" (onChange)="selectedSupplier($event)" optionLabel="supplier_name" optionValue="id" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (stock_in_form.controls.supplier_id.touched && stock_in_form.controls.supplier_id.invalid )}" ></p-dropdown>
+              <label for="float-input">Select Supplier</label>
+            </span>
+          </div>
+          <div class="col-4">
+            <button pButton class="p-button-sm p-button-raised" label="Product Query" (click)="productQuery()"></button>
+          </div>
+          <div class="col-4">
+            <span class="p-float-label">
+              <input type="text" formControlName="transaction_number" name="transaction_number" class="outline-none w-full text-red-500 font-bold" required pInputText /> 
+              <label for="float-input" class="text-xs">TRANSACTION NUMBER</label>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-12 surface-hover border-round flex flex-column justify-content-start align-items-center py-3" *ngIf="showDetails">
+          <div class="col-12">
+            <h5 class="text-sm"> PRODUCT DETAILS </h5>
+          </div>
+          <div class="col-12 flex flex-row justify-content-start align-items-center px-2">
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text"  name="description" [value]="product.product_name + ' ' + product.description" class="outline-none w-full" [disabled]="true" required pInputText /> 
+                <label for="float-input" class="text-xs">PRODUCT NAME </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text"  name="description" [value]="product.categories?.category_name" class="outline-none w-full" [disabled]="true" required pInputText /> 
+                <label for="float-input" class="text-xs">CATEGORY </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text"  name="description" [value]="product.brands?.brand_name" class="outline-none w-full" [disabled]="true" required pInputText /> 
+                <label for="float-input" class="text-xs">BRAND </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text"  name="description" [value]="product.suppliers?.supplier_name" class="outline-none w-full" [disabled]="true" required pInputText /> 
+                <label for="float-input" class="text-xs">SUPPLIER </label>
+              </span>
+            </div>
+          </div>  
+
+          <div class="col-12 flex flex-row justify-content-start align-items-center px-2">
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text"  name="description" [value]="product.quantity" class="outline-none w-full" [disabled]="true" required pInputText /> 
+                <label for="float-input" class="text-xs">CURRENT QUANTITY </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text"  name="description" [value]="product.unit" class="outline-none w-full uppercase" [disabled]="true" required pInputText /> 
+                <label for="float-input" class="text-xs">UNIT </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text"  name="description" [value]="product.quantity > 0 ? 'available' : 'out of stock' " class="outline-none w-full text-green-500 uppercase font-bold" [ngClass]="{'text-red-500' : product.quantity <= 0}" [disabled]="true" required pInputText /> 
+                <label for="float-input" class="text-xs">STOCK (STATUS) </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text"  name="description" [value]="product.is_active == true ? 'actived' : 'disabled'" class="outline-none w-full uppercase text-green-500 font-bold" [ngClass]="{'text-red-500' : !product.is_active}" [disabled]="true" required pInputText /> 
+                <label for="float-input" class="text-xs">PRODUCT STATUS </label>
+              </span>
+            </div>
+          </div>  
+        </div>
+
+        <div class="col-12 surface-hover border-round flex flex-column justify-content-start align-items-center py-3" *ngIf="showDetails">
+          <div class="col-12">
+            <h5 class="text-sm"> SUPPLIER STOCK DETAILS </h5>
+          </div>
+          <div class="col-12 flex flex-row justify-content-start align-items-center px-2">
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" formControlName="van_number" name="van_number" class="outline-none w-full" [ngClass]="{'ng-invalid ng-dirty' : (stock_in_form.controls.van_number.touched && stock_in_form.controls.van_number.invalid )}" required pInputText /> 
+                <label for="float-input" class="text-xs">VAN NUMBER / OR NUMBER</label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <p-calendar inputId="basic" formControlName="date" name="date"
+                  styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" [ngClass]="{'ng-invalid ng-dirty' : (stock_in_form.controls.date.touched && stock_in_form.controls.date.invalid )}"></p-calendar>
+                <label for="inputtext" class="p-text-sm">STOCK DATE </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="number" formControlName="quantity" name="quantity" class="outline-none w-full" [ngClass]="{'ng-invalid ng-dirty' : (stock_in_form.controls.quantity.touched && stock_in_form.controls.quantity.invalid )}" required pInputText /> 
+                <label for="float-input" class="text-xs">STOCK IN QUANTITY</label>
+              </span>
+            </div>
+            <div class="col-3">
+              <p-checkbox formControlName="status" name="status" [binary]="true" inputId="binary"></p-checkbox>
+              <label for="binary" class="p-1 text-green-500" [ngClass]="{'text-red-500' : !stock_in_form.value.status}"> {{ stock_in_form.value.status == true ? 'Completed' : 'Pending' }}</label> 
+            </div>
+          </div>  
+          <div class="col-12 mt-5">
+            <h5 class="text-xs"> CREATED BY: <span class="px-3 text-sm uppercase">{{ stock_in.user?.name }}</span></h5>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

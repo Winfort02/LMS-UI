@@ -1,0 +1,54 @@
+<div class="container w-full">
+  <div class="grid">
+    <div class="col-12 flex flex-column justify-content-center align-items-center gap-3">
+      <div class="col-12">
+        <span class="p-float-label">
+          <p-calendar inputId="basic" [(ngModel)]="order.sales_date" [disabled]="true" styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd"></p-calendar>
+            <label for="float-input" class="text-xs">SALES ORDER DATE</label>
+        </span>
+      </div>
+      <div class="col-12">
+        <span class="p-float-label">
+          <p-dropdown [options]="payment_types" [(ngModel)]="order.payment_type" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm"></p-dropdown>
+          <label for="float-input" class="text-xs">SELECT TYPE OF PAYMENT</label>
+        </span>
+      </div>
+      <div class="col-12">
+        <span class="p-float-label">
+          <input type="number" class="outline-none w-full p-inputtext-sm" [disabled]="true" [(ngModel)]="total_payment" pInputText /> 
+          <label for="float-input" class="text-xs">TOTAL PAYMENT</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label">
+          <input type="number" class="outline-none w-full p-inputtext-sm" [(ngModel)]="order.payment" (change)="calculate()" required pInputText /> 
+          <label for="float-input" class="text-xs">CASH</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label">
+          <input type="number" class="outline-none w-full p-inputtext-sm" [disabled]="true" [(ngModel)]="change" pInputText /> 
+          <label for="float-input" class="text-xs">CHANGE</label>
+        </span>
+      </div>
+      
+      <div class="col-12">
+        <span class="p-float-label">
+          <textarea [(ngModel)]="order.remarks" rows="2" class="outline-none w-full p-inputtext-sm" pInputTextarea [autoResize]="true"></textarea>
+          <label for="float-input">Remarks</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <p-checkbox [(ngModel)]="order.status" [binary]="true" inputId="binary"></p-checkbox>
+        <label for="binary" class="p-1 text-green-500" [ngClass]="{'text-red-500' : !order.status}"> {{ order.status == true ? 'PAID' : 'PENDING' }}</label>
+      </div>
+
+      <div class="col-12">
+        <button pButton type="button" label="Generate Sales" (click)="checkOut()" class="p-button-raised p-button-primary p-button-sm w-full outline-none"></button>
+      </div>
+    </div>
+  </div>
+</div>

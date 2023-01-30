@@ -1,0 +1,160 @@
+<div class="container w-full fadein animation-duration-2000">
+  <div class="grid">
+    <div class="col-12 flex flex-column justify-content-start aling-items-center w-full">
+      <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
+        <div class="col-12 flex flex-column sm:flex-column md:flex-row lg:flex-row xl:flex-row justify-content-around aling-items-center flex-row">
+          <div class="col-12 sm:col-12 md:col-4 lg:col-6 xl:col-6 flex justify-content-start align-items-center">
+            <h3 class="text-primary text-xl uppercase">Dashboard</h3>
+          </div>
+          <div class="col-12 sm:col-12 md:col-7 lg:col-5 xl:col-5 flex flex-row justify-content-center aling-items-center gap-3">
+            <div class="col-4 surface-hover border-round border-x-2 border-orange-700 h-4rem">
+              <label class="text-sm font-bold">CHARGE SALES</label>
+              <p class="text-orange-700 font-bold px-2 py-1"> {{ counts.charge_sales | currency: 'P ' }} </p>
+            </div>
+            <div class="col-4 surface-hover border-round border-x-2 border-cyan-700 h-4rem">
+              <label class="text-sm font-bold">DELIVERY SALES</label>
+              <p class="text-cyan-700 font-bold px-2 py-1"> {{ counts.delivery_sales | currency: 'P '}} </p>
+            </div>
+            <div class="col-4 surface-hover border-round border-x-2 border-teal-700 h-4rem">
+              <label class="text-sm font-bold">CASH SALES </label>
+              <p class="text-teal-700 font-bold px-2 py-1"> {{ counts.cash_sales | currency: 'P '}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 flex flex-column sm:flex-column md:flex-column lg:flex-row xl:flex-row justify-content-around aling-items-center gap-2 px-2 w-full">
+        <div class="col-12 sm:col-12 md:col-12 lg:col-8 xl:col-8 flex justify-content-around aling-items-center flex-row flex-wrap gap-2">
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-y-3 border-primary-500 ">
+            <h5 class="text-center text-sm uppercase"> Total Products </h5>
+            <p class="text-center text-2xl text-primary"> {{ counts.products }}</p>
+          </div>
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-y-3 border-orange-500">
+            <h5 class="text-center text-sm uppercase te"> Total Categories</h5>
+            <p class="text-center text-2xl text-orange-500"> {{ counts.categories }} </p>
+          </div>
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-y-3 border-teal-500">
+            <h5 class="text-center text-sm uppercase "> Total Customers </h5>
+            <p class="text-center text-2xl text-teal-500"> {{ counts.customers }} </p>
+          </div>
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-y-3 border-red-500">
+            <h5 class="text-center text-sm uppercase"> Total Supplier </h5>
+            <p class="text-center text-2xl text-red-500"> {{ counts.suppliers }} </p>
+          </div>
+        </div>
+        <div class="col-12 sm:col-12 md:col-12 lg:col-3 xl:col-3">
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-3 border-bluegray-500 flex-column">
+            <h5 class="text-center text-sm uppercase"> CURRENT SALES </h5>
+            <p class="text-center text-2xl text-bluegray-500">{{ counts.current_sales | currency: 'P ' }} </p>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col-12 w-full flex justify-content-around aling-items-center flex-column sm:flex-column md:flex-row lg:flex-row xl:flex-row">
+        <div class="col-12 sm:col-12 md:col-8 lg:col-8 xl:col-8 card border-y-3 border-primary">
+          <div class="col-12 sm:col-12 md:col-6 lg:col-5 xl:col-5">
+            <span class="p-float-label">
+              <p-calendar
+              inputId="basic"
+              class="p-inputtext-sm"
+              [(ngModel)]="current_date"
+              (onSelect)="selectedYear($event)"
+              view="year" dateFormat="yy"
+              [style]="{ width: '100%' }"
+                ></p-calendar>
+                <label for="inputtext" class="p-text-sm">SELECT YEAR</label>
+              </span>
+          </div>
+          <p-chart type="bar" [options]="options" [data]="data" width="800"></p-chart>
+        </div>
+        <div class="col-12 sm:col-12 md:col-3 lg:col-3 xl:col-3 card border-y-3 border-teal-500 max-w-100">
+          <div class="col-12">
+            <span class="p-float-label">
+              <p-dropdown [options]="product_list" [(ngModel)]="product_id" [filter]="true" filterBy="label" class="outline-none w-full p-inputtext-sm dashboard" optionLabel="label" optionValue="value" (onChange)="selectedProduct()" styleClass="w-full"></p-dropdown>
+              <label for="float-input" class="text-sm">SELECT PRODUCT</label>
+            </span>
+          </div>
+          <p-chart type="doughnut" [data]="data_doughnut" [options]="doughnutOptions" width="350"></p-chart>
+        </div>
+      </div>
+  
+      <div class="col-12 flex flex-column sm:flex-column md:flex-column lg:flex-row xl:flex-row justify-content-around aling-items-center gap-2 px-2 w-full">
+        <div class="col-12 sm:col-12 md:col-12 lg:col-8 xl:col-8 surface-hover border-round">
+          <div class="col-12">
+            <h5 class="text-sm"> LATEST 10 TRANSACTION </h5>
+          </div>
+          <div class="col-12">
+            <p-table [value]="sales_orders" (onLazyLoad)="showAllSalesOrder($event)" [loading]="loading" [lazy]="true"
+            [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll">
+              <ng-template pTemplate="header">
+                  <tr class="text-sm">
+                      <th pResizableColumn style="text-align: center; width: 5%;">NO</th>
+                      <th pResizableColumn>SO NUMBER.</th>
+                      <th pResizableColumn>CUSTOMER</th>
+                      <th pResizableColumn>DATE</th>
+                      <th pResizableColumn>CASH</th>
+                      <th pResizableColumn>AMOUNT</th>
+                      <th pResizableColumn>BALANCE</th>
+                      <th pResizableColumn>SALES TYPE</th>
+                      <th pResizableColumn>PAYMENT</th>
+                      <th pResizableColumn>ORDER STATUS</th>
+                      <th pResizableColumn>STATUS</th>
+                      <th pResizableColumn>ENCODED BY</th>
+                      <th pResizableColumn>ENCODED DATE</th>
+                      <th pResizableColumn style="text-align: center; width: 5%;">PRINT</th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-order let-i="rowIndex">
+                  <tr class="text-sm" [ngClass]="{'bg-red-600' : order.order_status == 'Cancel'}">
+                      <td> {{ i + 1 }}</td>
+                      <td>{{order.sales_order_number }}</td>
+                      <td>{{order.customer?.customer_name }}</td>
+                      <td>{{order.sales_date }}</td>
+                      <td class="text-right">{{order.payment | currency: 'P ' }}</td>
+                      <td class="text-right">{{order.total_amount | currency: 'P ' }}</td>
+                      <td class="text-right">{{(order.total_amount - order.payment) | currency: 'P '}}</td>
+                      <td>{{order.sales_type }}</td>
+                      <td>{{order.payment_type }}</td>
+                      <td>{{order.order_status }}</td>
+                      <td [ngClass]="{'text-red-600' : !order.status }" class="text-teal-500">{{order.status == 1 ? 'Paid' : 'Pending' }}</td>
+                      <td>{{order.user?.name  }}</td>
+                      <td>{{order.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+                      <td><button pButton type="button" label="Print" (click)="viewReceipt(order)" icon="pi pi-print" class="p-button-text p-button-success p-button-sm text-xs"></button></td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          
+        </div>
+  
+        <div class="col-12 sm:col-12 md:col-12 lg:col-3 xl:col-3 surface-hover border-round flex flex-column justify-content-start aling-items-center">
+          <div class="col-12">
+            <h5 class="text-sm text-center"> PRODUCT WITH LOW QUANTITY </h5>
+          </div>
+          <div class="col-12 flex flex-column justify-content-start align-items-start row-gap-3" *ngIf="products.length">
+            <p-table [value]="products" (onLazyLoad)="showAllSalesOrder($event)" [loading]="loading" [lazy]="true"
+            [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll" style="width: 100%;">
+              <ng-template pTemplate="header">
+                  <tr class="text-sm">
+                      <th pResizableColumn>PRODUCT</th>
+                      <th pResizableColumn>BRAND</th>
+                      <th pResizableColumn>QTY</th>
+                      <th pResizableColumn>STATUS</th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-product let-i="rowIndex">
+                  <tr class="text-sm">
+                      <td>{{product.product_name }}</td>
+                      <td>{{product.brands?.brand_name }}</td>
+                      <td>{{product.quantity }}</td>
+                      <td [ngClass]="{'text-orange-500' : (product.quantity <= 10 && product.quantity > 0),'text-red-500': product.quantity === 0}">{{ product.quantity > 0 ? 'AVAILABLE' : 'OUT OF STOCK' }}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container w-full">
+  <div class="grid">
+    <div class="col-12 flex flex-column justify-content-start aling-items-center">
+      <div class="col-12 flex flex-row justify-content-around align-items-start gap-2 mt-5">
+
+        <div class="col-3 surface-hover flex flex-column justify-content-center align-items-center border-round cursor-pointer border-x-3 border-primary-500" (click)="naviagteTo('customers')">
+          <i class="pi pi-users text-8xl px-2 py-3 text-primary-500"></i>
+          <p class="px-2 py-2 text-primary-500 font-bold">CREATE CUSTOMER </p>
+        </div>
+        <div class="col-3 surface-hover flex flex-column justify-content-center align-items-center border-round cursor-pointer border-x-3 border-green-500" (click)="naviagteTo('order-detail/0')">
+          <i class="pi pi-dollar text-8xl px-2 py-3 text-green-500"></i>
+          <p class="px-2 py-2 text-green-500 font-bold"> CREATE SALES </p>
+        </div>
+        <div class="col-3 surface-hover flex flex-column justify-content-center align-items-center border-round cursor-pointer border-x-3 border-orange-500" (click)="naviagteTo('orders')">
+          <i class="pi pi-print text-8xl px-2 py-3 text-orange-500"></i>
+          <p class="px-2 py-2 text-orange-500 font-bold">PRINT SALES ORDER</p>
+        </div>
+      </div>
+      
+      <div class="col-12 flex flex-row justify-content-around align-items-start gap-3 mt-5">
+        <div class="col-3 surface-hover flex flex-column justify-content-around align-items-center border-round cursor-pointer border-x-3 border-teal-500" (click)="naviagteTo('products')">
+          <i class="pi pi-book text-8xl px-2 py-3 text-teal-500"></i>
+          <p class="px-2 py-2 text-teal-500 font-bold">PRODUCT LIST</p>
+        </div>
+        <div class="col-3 surface-hover flex flex-column justify-content-around align-items-center border-round cursor-pointer border-x-3 border-red-500" (click)="naviagteTo('product/inventory')">
+          <i class="pi pi-file-pdf text-8xl px-2 py-3 text-red-500"></i>
+          <p class="px-2 py-2 text-red-500 font-bold">PRODUCT INVENTORY REPORT</p>
+        </div>
+        <div class="col-3 surface-hover flex flex-column justify-content-around align-items-center border-round cursor-pointer border-x-3 border-bluegray-500" (click)="naviagteTo('order/sales-report')">
+          <i class="pi pi-file-pdf text-8xl px-2 py-3 text-bluegray-500"></i>
+          <p class="px-2 py-2 text-bluegray-500 font-bold">SALES ORDER SUMMARY</p>
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+</div>

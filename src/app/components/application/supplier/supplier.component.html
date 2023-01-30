@@ -1,0 +1,66 @@
+
+
+<div class="container max-w-full fadein animation-duration-2000">
+  <div class="grid">
+    <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
+      <div class="col-12 flex justify-content-center aling-items-center flex-row flex-wrap">
+        <div class="col-12 md:col-3 lg:col-3 xl:col-3 flex justify-content-start align-items-center">
+          <h3 class="text-primary text-xl uppercase"> Suppliers </h3>
+        </div>
+        <div class="col-12 md:col-6 lg:col-6 xl:col-6 flex justify-content-center align-items-center">
+          <div class="p-inputgroup">
+            <input type="text" class="p-inputtext-sm" [(ngModel)]="keywords" pInputText placeholder="Search...">   
+            <button pButton type="button" class="p-button-sm p-button-raised" icon="pi pi-search" (click)="search()"></button>      
+          </div>
+        </div>
+        <div class="col-12 md:col-3 lg:col-3 xl:col-3 flex justify-content-end align-items-center">
+          <button pButton type="button" label="Add Supplier" (click)="addSupplier()" icon="pi pi-plus" class="p-button-raised p-button-primary p-button-sm"></button>
+        </div>
+      </div>
+      <div class="col-12">
+        <p-table [value]="suppliers" (onLazyLoad)="showSupplierLazyLoad($event)" [loading]="loading" [lazy]="true"
+        [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+              <tr class="text-sm">
+                  <th pResizableColumn style="text-align: center; width: 5%;">No</th>
+                  <th pResizableColumn>Supplier Name</th>
+                  <th pResizableColumn>Contact Number</th>
+                  <th pResizableColumn>Address</th>
+                  <th pResizableColumn>Email</th>
+                  <th pResizableColumn>Status</th>
+                  <th pResizableColumn>Created By</th>
+                  <th pResizableColumn style="text-align: center; width: 15%;">Created Date</th>
+                  <th pResizableColumn style="text-align: center; width: 5%;">Edit</th>
+                  <th pResizableColumn style="text-align: center; width: 5%;">Delete</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-supplier let-i="rowIndex">
+              <tr class="text-xs">
+                  <td> {{ i + 1 }}</td>
+                  <td>{{supplier.supplier_name | titlecase }}</td>
+                  <td>{{supplier.contact_number | titlecase }}</td>
+                  <td>{{supplier.address }}</td>
+                  <td>{{supplier.email }}</td>
+                  <td [ngClass]="{'text-red-600' : !supplier.is_active }" class="text-teal-500">{{supplier.is_active == 1 ? 'Actived' : 'Disabled' }}</td>
+                  <td>{{supplier.created_by | titlecase }}</td>
+                  <td>{{supplier.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+                  <td><button pButton type="button" label="Edit" (click)="updateSupplier(supplier)" icon="pi pi-pencil" class="p-button-text p-button-primary p-button-sm text-xs"></button></td>
+                  <td><button pButton type="button" label="Delete" (click)="deleteSupplier(supplier.id)" icon="pi pi-trash" class="p-button-text p-button-danger p-button-sm text-xs"></button></td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="col-12">
+        <button pButton pRipple type="button" label="<<" class="p-button-text paginator" id="firstPage" (click)="firstPage()"></button>
+        <button pButton pRipple type="button" label="<" class="p-button-text paginator" id="prevPage" (click)="prevPage()"></button>
+        <button pButton pRipple type="button" [label]="page_detail" class="p-button-text paginator" disabled></button>
+        <button pButton pRipple type="button" label=">" class="p-button-text paginator" id="nextPage" (click)="nextPage()"></button>
+        <button pButton pRipple type="button" label=">>" class="p-button-text paginator" id="lastPage" (click)="lastPage()"></button>
+      </div>
+      <!-- <div class="sm:col-12 md:col-12 lg:col-6 xl:col-4">
+        <pagination-controls class="text-left p-2" [responsive]="true" (pageChange)="pageChangeEvent($event)"></pagination-controls>
+      </div> -->
+    </div>
+  </div>
+</div>
+

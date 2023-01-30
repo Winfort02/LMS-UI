@@ -1,0 +1,130 @@
+
+
+
+<div class="container">
+  <div class="grid">
+    <div class="col-12 flex flex-column align-items-center justify-content-center w-full gap-3">
+      <div class="col-12 flex flex-row flex-wrap">
+        <div class="col-12 sm:col-5 md:col-5 lg:col-6 xl:col-6 flex justify-content-start align-items-center">
+          <span class="font-bold text-primary"> SALES ORDER DETAILS </span>
+        </div>
+        <div class="col-12 sm:col-7 md:col-7 lg:col-6 xl:col-6  flex flex-row justify-content-end align-items-center gap-2">
+          <button pButton class="p-button-raised p-button-sm p-button-primary" label="Quick Add Customer" (click)="addCustomer()"></button>
+          <button pButton class="p-button-raised p-button-sm p-button-primary" label="Process Order" [disabled]="orderForm.invalid" (click)="proceed()"></button>
+          <button pButton class="p-button-sm p-button-raised p-button-danger" label="Close" (click)="close()"></button>
+        </div>
+      </div>
+      <div class="col-12 surface-hover border-round py-2 px-2 mx-auto">
+        <form [formGroup]="orderForm" class="col-12 flex flex-column align-items-center justify-content-center gap-2">
+          <div class="col-12 flex flex-column sm:flex-row md:flex-row lg:flex-row xl:flex-row align-items-center justify-content-start flex-wrap row-gap-3">
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <p-dropdown [options]="customers" formControlName="customer_id" name="customer_id" [filter]="true" filterBy="label" (onChange)="selectedSupplier($event)" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.customer_id.touched && orderForm.controls.customer_id.invalid )}" ></p-dropdown>
+                <label for="float-input" class="text-xs">SELECT CUSTOMER</label>
+              </span>
+            </div>
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <input type="text" formControlName="transaction_number" name="transaction_number" class="p-inputtext-sm outline-none w-full text-red-500 font-bold" required pInputText /> 
+                <label for="float-input" class="text-xs">TRANSACTION NUMBER</label>
+              </span>
+            </div>
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <input type="text" formControlName="sales_order_number" name="sales_order_number" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.sales_order_number.touched && orderForm.controls.sales_order_number.invalid )}" class="p-inputtext-sm outline-none w-full text-red-500 font-bold" required pInputText /> 
+                <label for="float-input" class="text-xs">SALES ORDER NUMBER / PO NUMBER</label>
+              </span>
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <p-dropdown [options]="sales_type" formControlName="sales_type" name="sales_type" [filter]="true" filterBy="label" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.sales_type.touched && orderForm.controls.sales_type.invalid )}" ></p-dropdown>
+                <label for="float-input" class="text-xs">SELECT TYPE OF SALES</label>
+              </span>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+
+      <div class="col-12 surface-hover border-round py-2 px-2 mx-auto" *ngIf="showOrderItems">
+        <div class="col-12 flex flex-column justify-content-center align-items-start gap-3">
+          <div class="col-12">
+            <label for=""> CUSTOMER INFORMATION </label>
+          </div>
+          <div class="col-12 flex flex-row justify-content-start align-items-center">
+            <div class="col-4">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="customer.customer_name " [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> CUSTOMER NAME </label>
+              </span>
+            </div>
+            <div class="col-4">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="customer.phone_number" [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> CONTACT NUMBER </label>
+              </span>
+            </div>
+            <div class="col-4">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="customer.address" [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> ADDRESS</label>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 surface-hover border-round py-2 px-2 mx-auto" *ngIf="showOrderItems">
+        <div class="col-12">
+          <div class="col-12 flex flex-row justify-content-between align-items-center">
+            <label class="text-base px-2"> ORDER ITEMS </label>
+            <button pButton class="p-button-raised p-button-sm" (click)="productQuery()" label="Select Product"></button>
+          </div>
+          
+          <p-table [value]="dataSource" responsiveLayout="scroll" styleClass=" p-datatable-sm p-datatable-gridlines">
+            <ng-template pTemplate="header">
+                <tr class="text-xs sm:text-xs md:text-sm lg:text-sm lg:text-sm">
+                    <th style="text-align: center;">Product Image</th>
+                    <th style="min-width: 100px; max-width: 150px;">Product Name</th>
+                    <th style="max-width: 100px;">Brand</th>
+                    <th style="min-width: 80px; max-width: 80px;">Product Price</th>
+                    <th style="min-width: 50px; max-width: 50px;">Quantity</th>
+                    <th style="min-width: 100px; max-width: 200px;">Sub Total</th>
+                    <th style="min-width: 100px; max-width: 200px;">Discount</th>
+                    <th style="min-width: 150px; max-width: 300px;">Total</th>
+                    <th style="min-width: 150px; max-width: 300px; text-align: right;"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr class="text-xs sm:text-xs md:text-sm lg:text-sm lg:text-sm">
+                    <td style="text-align: center;" > <img src="{{ imgUrl + product.product_image}}" alt="" width="30" height="30"></td>
+                    <td>{{product.product_name }}</td>
+                    <td>{{product.brand }}</td>
+                    <td>{{product.price | currency: 'P '}}</td>
+                    <td style="line-height: 30px">
+                      <button pButton class="p-button-text p-button-sm" icon="pi pi-minus" (click)="onRemoveQty(product)"></button>
+                      <span class="px-3"> {{product.quantity}} </span>
+                      <button pButton class="p-button-text p-button-sm" icon="pi pi-plus" (click)="onAddQty(product)"></button>
+                    </td>
+                    <td style="text-align: right;">{{ product.price * product.quantity | currency: 'P '}}</td>
+                    <td style="text-align: right;">{{ product.discount | currency: 'P '}}</td>
+                    <td style="text-align: right;">{{(product.price * product.quantity) - product.discount | currency: 'P '}}</td>
+                    <td style="text-align: right;"><button pButton class="p-button-text p-button-sm p-button-danger" icon="pi pi-trash" (click)="removeItemFromCart(product)"></button></td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer" let-product>
+              <tr class="text-xs sm:text-xs md:text-sm lg:text-sm lg:text-sm">
+                <td colspan="6"></td>
+                <td colspan="1" style="text-align: right;">{{ getTotalDiscount(cart.items) | currency: 'P '}}</td>
+                <td colspan="1" style="text-align: right;">{{ getTotal(cart.items) | currency: 'P '}}</td>
+                <td colspan="1" style="text-align: right;">
+                  <button pButton class="p-button-raised p-button-sm p-button-danger" (click)="onClearCart()" label="Remove All Items"></button></td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

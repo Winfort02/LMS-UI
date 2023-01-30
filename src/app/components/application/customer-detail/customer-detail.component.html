@@ -1,0 +1,59 @@
+
+<div class="container w-full">
+  <div class="grid">
+    <div class="col-12">
+      <form [formGroup]="customerForm" class="col-12 flex flex-column justify-content-center aling-items-center gap-3">
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" formControlName="customer_name" name="customer_name" class="outline-none w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (customerForm.controls.customer_name.touched && customerForm.controls.customer_name.invalid )}" required pInputText /> 
+              <label for="float-input">Customer Name</label>
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" mask="(999) 999-9999" formControlName="phone_number" name="phone_number" class="outline-none w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (customerForm.controls.phone_number.touched && customerForm.controls.phone_number.invalid )}" required pInputText /> 
+              <label for="float-input">Contact Number</label>
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" formControlName="address" name="address" class="outline-none w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (customerForm.controls.address.touched && customerForm.controls.address.invalid )}" required pInputText /> 
+              <label for="float-input">Address</label>
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span class="p-float-label">
+              <p-dropdown [options]="gender_option" formControlName="gender" name="gender" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (customerForm.controls.gender.touched && customerForm.controls.gender.invalid )}" ></p-dropdown>
+              <label for="float-input">Gender</label>
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" formControlName="email" name="email" class="outline-none w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (customerForm.controls.email.touched && customerForm.controls.email.invalid )}" required pInputText /> 
+              <label for="float-input">Email (optional) </label>
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" formControlName="created_by" name="created_by" class="outline-none w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (customerForm.controls.created_by.touched && customerForm.controls.created_by.invalid )}" required pInputText /> 
+              <label for="float-input">Created By</label>
+            </span>
+          </div>
+
+          <div class="col-12 ">
+            <p-checkbox formControlName="is_active" name="is_active" [binary]="true" inputId="binary"></p-checkbox>
+            <label for="binary" class="p-1"> {{ customerForm.value.is_active == true ? 'Active' : 'Deactive' }}</label> 
+          </div>
+          
+          <div class="col-12">
+            <button pButton class="w-full p-button-sm p-button-raised" label="Save" (click)="save()" [disabled]="customerForm.invalid"></button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+
+
+<div class="container max-w-full">
+  <div class="grid">
+    <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
+      <div class="col-12 flex justify-content-end aling-items-center flex-row flex-wrap">
+        <div class="col-12 md:col-6 lg:col-6 xl:col-6 flex justify-content-center align-items-center">
+          <div class="p-inputgroup">
+            <input type="text" class="p-inputtext-sm" [(ngModel)]="keywords" pInputText placeholder="Search...">   
+            <button pButton type="button" class="p-button-sm p-button-raised" icon="pi pi-search" (click)="search()"></button>      
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <p-table [value]="products" (onLazyLoad)="showProductLazyLoad($event)" [loading]="loading" [lazy]="true"
+        [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+              <tr class="text-sm">
+                  <th pResizableColumn style="text-align: center; width: 5%;">Select</th>
+                  <th pResizableColumn style="text-align: center;">Image</th>
+                  <th pResizableColumn>Product Name</th>
+                  <th pResizableColumn>Supplier</th>
+                  <th pResizableColumn style="width: 80px;">Selling Price</th>
+                  <th pResizableColumn style="width: 80px;">Quantity</th>
+                  <th pResizableColumn style="width: 70px; text-align: center;">Status</th>
+                  <th pResizableColumn style="width: 100px;">Created By</th>
+                  <th pResizableColumn style="width: 15%;">Created Date</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product let-i="rowIndex">
+              <tr class="text-xs">
+                  <td><button pButton type="button" label="Select" (click)="selectProduct(product)" class="p-button-raised p-button-primary p-button-sm text-xs"></button></td>
+                  <td style="text-align: center; width: 5%;"> <img [src]="imgUrl + product.image" alt="product_image" width="30" height="25" class="product_img"></td>
+                  <td>{{product.product_name | titlecase }} {{ ' ' + product.description }}</td>
+                  <td>{{product.suppliers.supplier_name }}</td>
+                  <td class="text-right">{{product.selling_price  }}</td>
+                  <td class="text-right">{{product.quantity  }}</td>
+                  <td [ngClass]="{'text-red-600' : !product.is_active }" class="text-teal-500 text-center">{{product.is_active == 1 ? 'Actived' : 'Disabled' }}</td>
+                  <td>{{product.created_by | titlecase }}</td>
+                  <td>{{product.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="col-12">
+        <button pButton pRipple type="button" label="<<" class="p-button-text paginator" id="firstPage" (click)="firstPage()"></button>
+        <button pButton pRipple type="button" label="<" class="p-button-text paginator" id="prevPage" (click)="prevPage()"></button>
+        <button pButton pRipple type="button" [label]="page_detail" class="p-button-text paginator" disabled></button>
+        <button pButton pRipple type="button" label=">" class="p-button-text paginator" id="nextPage" (click)="nextPage()"></button>
+        <button pButton pRipple type="button" label=">>" class="p-button-text paginator" id="lastPage" (click)="lastPage()"></button>
+      </div>
+      <!-- <div class="sm:col-12 md:col-12 lg:col-6 xl:col-4">
+        <pagination-controls class="text-left p-2" [responsive]="true" (pageChange)="pageChangeEvent($event)"></pagination-controls>
+      </div> -->
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,51 @@
+<div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
+  <div class="col-12 flex flex-column sm:flex-column md:flex-row lg:flex-row xl:flex-row flex-wrap row-gap-3">
+    <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+      <span class="p-float-label">
+        <p-calendar inputId="basic" (onSelect)="onSelectDate()"  [(ngModel)]="start_date"
+          styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" ></p-calendar>
+        <label for="inputtext" class="p-text-sm">START DATE </label>
+      </span>
+    </div>
+    <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+      <span class="p-float-label">
+        <p-calendar inputId="basic" (onSelect)="onSelectDate()"  [(ngModel)]="end_date"
+          styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" ></p-calendar>
+        <label for="inputtext" class="p-text-sm">END DATE </label>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-12">
+  <p-table [value]="logs" (onLazyLoad)="showLogLazyLoad($event)" [loading]="loading" [lazy]="true"
+  [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr class="text-sm">
+            <th pResizableColumn style="text-align: center; width: 5%;">No</th>
+            <th pResizableColumn>User</th>
+            <th pResizableColumn>Log Type</th>
+            <th pResizableColumn>Remarks</th>
+            <th pResizableColumn style="text-align: left; width: 15%;">Log Time</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-log let-i="rowIndex">
+        <tr class="text-xs">
+            <td> {{ i + 1 }}</td>
+            <td>{{log.user.name | titlecase }}</td>
+            <td>{{log.logs  }}</td>
+            <td>{{log.remarks }}</td>
+            <td>{{log.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+        </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<div class="col-12">
+  <button pButton pRipple type="button" label="<<" class="p-button-text paginator" id="firstPage" (click)="firstPage()"></button>
+  <button pButton pRipple type="button" label="<" class="p-button-text paginator" id="prevPage" (click)="prevPage()"></button>
+  <button pButton pRipple type="button" [label]="page_detail" class="p-button-text paginator" disabled></button>
+  <button pButton pRipple type="button" label=">" class="p-button-text paginator" id="nextPage" (click)="nextPage()"></button>
+  <button pButton pRipple type="button" label=">>" class="p-button-text paginator" id="lastPage" (click)="lastPage()"></button>
+</div>

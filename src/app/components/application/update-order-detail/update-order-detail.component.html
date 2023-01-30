@@ -1,0 +1,82 @@
+
+<div class="container max-w-full">
+  <div class="grid">
+    <div class="col-12 flex justify-content-center align-items center flex-column p-2">
+      <div class="col-12">
+        <form [formGroup]="orderForm">
+          <div class="col-12 flex justify-content-center align-items-center flex-column gap-3">
+            <div class="col-12">
+              <span class="p-float-label">
+                <p-calendar inputId="basic" formControlName="sales_date" name="sales_date"
+                  styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.sales_date.touched && orderForm.controls.sales_date.invalid )}"></p-calendar>
+                  <label for="float-input" class="text-xs">SALES ORDER DATE</label>
+              </span>
+            </div>
+            <div class="col-12">
+              <span class="p-float-label">
+                <p-dropdown [options]="customers" formControlName="customer_id" name="customer_id" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.customer_id.touched && orderForm.controls.customer_id.invalid )}" ></p-dropdown>
+                <label for="float-input" class="text-xs">SELECT CUSTOMER</label>
+              </span>
+            </div>
+            <div class="col-12">
+              <span class="p-float-label">
+                <p-dropdown [options]="payment_types" formControlName="payment_type" name="payment_type" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.payment_type.touched && orderForm.controls.payment_type.invalid )}" ></p-dropdown>
+                <label for="float-input" class="text-xs">SELECT TYPE OF PAYMENT</label>
+              </span>
+            </div>
+            <div class="col-12">
+              <span class="p-float-label">
+                <p-dropdown [options]="order_statuses" formControlName="order_status" name="order_status" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.order_status.touched && orderForm.controls.order_status.invalid )}" ></p-dropdown>
+                <label for="float-input" class="text-xs">SELECT ORDER STATUS</label>
+              </span>
+            </div>
+
+            <div class="col-12">
+              <span class="p-float-label">
+                <p-dropdown [options]="sales_type" formControlName="sales_type" name="sales_type" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.sales_type.touched && orderForm.controls.sales_type.invalid )}" ></p-dropdown>
+                <label for="float-input" class="text-xs">SELECT TYPE OF SALES</label>
+              </span>
+            </div>
+
+
+            <div class="col-12">
+              <span class="p-float-label">
+                <input type="text" class="outline-none w-full p-inputtext-sm" formControlName="current_payment" name="current_payment" pInputText /> 
+                <label for="float-input" class="text-xs">CURRENT PAYMENT</label>
+              </span>
+            </div>
+
+            <div class="col-12">
+              <span class="p-float-label">
+                <input type="number" class="outline-none w-full p-inputtext-sm" formControlName="payment" name="payment"
+                [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.payment.touched && orderForm.controls.payment.invalid )}"  required pInputText /> 
+                <label for="float-input" class="text-xs">CASH</label>
+              </span>
+            </div>
+
+            <div class="col-12">
+              <span class="p-float-label">
+                <input type="text" class="outline-none w-full p-inputtext-sm" formControlName="remaining_balance" name="remaining_balance" pInputText /> 
+                <label for="float-input" class="text-xs">REMAINING BALANCE</label>
+              </span>
+            </div>
+
+            <div class="col-12">
+              <span class="p-float-label">
+                <textarea formControlName="remarks" name="remarks" rows="2" class="outline-none w-full p-inputtext-sm"
+                [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.remarks.touched && orderForm.controls.remarks.invalid )}"  pInputTextarea [autoResize]="true"></textarea>
+                <label for="float-input">Remarks</label>
+              </span>
+            </div>
+            <div class="col-12">
+              <p-checkbox formControlName="status" name="status" [binary]="true" inputId="binary"></p-checkbox>
+              <label for="binary" class="p-1 text-green-500" [ngClass]="{'text-red-500' : !orderForm.value.status}"> {{ orderForm.value.status == true ? 'PAID' : 'PENDING' }}</label>
+            </div>
+            <div class="col-12">
+              <button pButton type="button" label="Submit" [disabled]="orderForm.invalid" (click)="save()" class="p-button-raised p-button-primary p-button-sm w-full outline-none"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

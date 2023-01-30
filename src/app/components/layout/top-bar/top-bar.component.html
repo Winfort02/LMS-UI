@@ -1,0 +1,11 @@
+<div class="layout-topbar">
+  <a class="menu-button" (click)="onMenuButtonClick($event)" [ngClass]="{ hide : hide}">
+    <i class="pi pi-bars"></i>
+  </a>
+  <a routerLink="#" class="text-base text-white font-bold p-2 company uppercase">
+     <span class="text-red-400">LMS - Inventory System</span>
+  </a>
+  <ul class="topbar-menu">
+    <li class="topbar-submenu-header text-md"><span class="text-sm"> {{ dateToday | date: 'EEEE - MMMM d, y h:mm a'  }} </span> </li>
+  </ul>
+</div>

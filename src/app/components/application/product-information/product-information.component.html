@@ -1,0 +1,68 @@
+<div class="grid">
+  <div class="col-12 flex flex-column sm:flex-column md:flex-column lg:flex-column xl:flex-row justify-content-start align-items-start">
+    <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-4">
+      <div class="product-image import-file-layout">
+        <div class="flex justify-content-center align-items-center">
+          <img [src]="imgSource" alt="product-image" class="image-preview"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 sm:col-12 md:col-12 lg:col-12 xl:col-8 flex flex-column justify-content-start align-items-start">
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column sm:flex-column md:flex-row lg:flex-row justify-content-start align-items-start">
+        <div class="col-12">
+          <p class="text-xs"> PRODUCT NAME : <span class="text-sm uppercase font-bold px-2"> {{ product.product_name }} </span></p>
+        </div>
+        <div class="col-12">
+          <p class="text-xs"> CATEGORY : <span class="text-sm uppercase font-bold px-2"> {{ product.categories?.category_name }} </span></p>
+        </div>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column sm:flex-column md:flex-row lg:flex-row justify-content-start align-items-start">
+        <div class="col-12">
+          <p class="text-xs"> BRAND NAME : <span class="text-sm uppercase font-bold px-2"> {{ product.brands?.brand_name }} </span></p>
+        </div>
+        <div class="col-12">
+          <p class="text-xs"> SUPPLIER : <span class="text-sm uppercase font-bold px-2"> {{ product.suppliers?.supplier_name }} </span></p>
+        </div>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column sm:flex-column md:flex-row lg:flex-row justify-content-start align-items-start">
+        <div class="col-12">
+          <p class="text-xs"> BASE PRICE : <span class="text-sm font-bold px-2"> {{ product.base_price | currency : 'P '}} </span></p>
+        </div>
+        <div class="col-12">
+          <p class="text-xs"> SELLING PRICE : <span class="text-sm font-bold px-2"> {{ product.selling_price | currency : 'P '}} </span></p>
+        </div>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column sm:flex-column md:flex-row lg:flex-row justify-content-start align-items-start">
+        <div class="col-12">
+          <p class="text-xs"> QUANTIY : <span class="text-sm font-bold uppercase px-2"> {{ product.quantity }} ({{ product.unit }})</span></p>
+        </div>
+        <div class="col-12">
+          <p class="text-xs"> STOCK ON HAND : <span class="text-sm font-bold uppercase px-2 text-green-500" [ngClass]="{'text-red-500': product.quantity <= 0 }"> {{ product.quantity > 0 ? 'Available' : 'Out of Stock '}} </span></p>
+        </div>
+      </div>
+
+      <div class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6 flex flex-column sm:flex-column md:flex-row lg:flex-row justify-content-start align-items-start">
+        <div class="col-12">
+          <p class="text-xs"> STATUS : <span class="text-sm font-bold px-2"> {{ product.is_active ? 'ACTIVED' : 'DISABLED' }} </span></p>
+        </div>
+        <div class="col-12">
+          <p class="text-xs"> CREATED BY : <span class="text-sm font-bold uppercase px-2"> {{ product.created_by }} </span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="col-12 surface-hover flex flex-column justify-content-start aling-items-center">
+    <div class="col-12">
+      <h5 class="text-sm"> PRODUCT DESCRIPTION </h5>
+    </div>
+    <div class="col-12">
+      <p class="text-sm px-3"> {{ product.description }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+
+
+<div class="container max-w-full fadein animation-duration-2000">
+  <div class="grid">
+    <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
+
+      <div class="col-12 flex justify-content-start aling-items-start flex-row flex-wrap">
+
+        <div class="col-12 md:col-4 lg:col-2 xl:col-2 flex justify-content-start align-items-center">
+          <h3 class="text-primary text-xl uppercase"> SALES ORDERS </h3>
+        </div>
+
+        <div class="col-12 md:col-4 lg:col-3 xl:col-3">
+          <span class="p-float-label">
+            <p-dropdown [options]="customers" [(ngModel)]="customer_id" [filter]="true" filterBy="customer_name" (onChange)="selectedCustomer()" class="outline-none w-full p-inputtext-sm" optionLabel="customer_name" optionValue="id" styleClass="w-full"></p-dropdown>
+          </span>
+        </div>
+
+
+        <div class="col-12 md:col-4 lg:col-3 xl:col-3">
+          <div class="p-inputgroup">
+            <input type="text" class="p-inputtext-sm" [(ngModel)]="keywords" pInputText placeholder="Search...">   
+            <button pButton type="button" class="p-button-sm p-button-raised" icon="pi pi-search" (click)="search()"></button>      
+          </div>
+        </div>
+        <div class="col-12 md:col-12 lg:col-4 xl:col-4 flex justify-content-end align-items-center gap-2">
+          <button pButton type="button" label="Create Sales Order" (click)="createSalesOrder()" icon="pi pi-plus" class="p-button-raised p-button-primary p-button-sm"></button>
+
+          <button pButton type="button" label="Close" (click)="close()" class="p-button-raised p-button-danger p-button-sm"></button>
+        </div>
+      </div>
+      <div class="col-12">
+        <p-table [value]="sales_orders" (onLazyLoad)="showAllSalesOrder($event)" [loading]="loading" [lazy]="true"
+        [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+              <tr class="text-sm">
+                  <th pResizableColumn>DATE</th>
+                  <th pResizableColumn>SO NUMBER</th>
+                  <th pResizableColumn>CUSTOMER</th>
+                  <th pResizableColumn>CASH</th>
+                  <th pResizableColumn>AMOUNT</th>
+                  <th pResizableColumn>BALANCE</th>
+                  <th pResizableColumn>SALES TYPE</th>
+                  <th pResizableColumn style="width: 30px;">PAYMENT</th>
+                  <th pResizableColumn style="width: 30px;">ORDER STATUS</th>
+                  <th pResizableColumn style="width: 30px;">STATUS</th>
+                  <th pResizableColumn>ENCODED BY</th>
+                  <th pResizableColumn style="width: 15%;">ENCODED DATE</th>
+                  <th pResizableColumn style="text-align: center; width: 5%;">PRINT</th>
+                  <th pResizableColumn style="text-align: center; width: 5%;">UPDATE</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-order let-i="rowIndex">
+              <tr class="text-sm"  [ngClass]="{'bg-red-600' : order.order_status == 'Cancel'}">
+                  <td>{{order.sales_date }}</td>
+                  <td>{{order.sales_order_number }}</td>
+                  <td>{{order.customer?.customer_name }}</td>
+                  <td class="text-right">{{order.payment | currency: 'P ' }}</td>
+                  <td class="text-right">{{order.total_amount | currency: 'P ' }}</td>
+                  <td class="text-right">{{(order.total_amount - order.payment) | currency: 'P '}}</td>
+                  <td>{{order.sales_type }}</td>
+                  <td>{{order.payment_type }}</td>
+                  <td>{{order.order_status }}</td>
+                  <td [ngClass]="{'text-red-600' : !order.status}" class="text-teal-500">{{order.status == 1 ? 'Paid' : 'Pending' }}</td>
+                  <td>{{order.user?.name  }}</td>
+                  <td>{{order.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+                  <td><button pButton type="button" label="Print" (click)="viewReceipt(order)" icon="pi pi-eye" class="p-button-text p-button-success p-button-sm text-xs"></button></td>
+                  <td><button pButton type="button" label="Update" (click)="updateSalesOrder(order)" icon="pi pi-pencil" class="p-button-text p-button-primary p-button-sm text-xs"></button></td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="col-12">
+        <button pButton pRipple type="button" label="<<" class="p-button-text paginator" id="firstPage" (click)="firstPage()"></button>
+        <button pButton pRipple type="button" label="<" class="p-button-text paginator" id="prevPage" (click)="prevPage()"></button>
+        <button pButton pRipple type="button" [label]="page_detail" class="p-button-text paginator" disabled></button>
+        <button pButton pRipple type="button" label=">" class="p-button-text paginator" id="nextPage" (click)="nextPage()"></button>
+        <button pButton pRipple type="button" label=">>" class="p-button-text paginator" id="lastPage" (click)="lastPage()"></button>
+      </div>
+      <!-- <div class="sm:col-12 md:col-12 lg:col-6 xl:col-4">
+        <pagination-controls class="text-left p-2" [responsive]="true" (pageChange)="pageChangeEvent($event)"></pagination-controls>
+      </div> -->
+    </div>
+  </div>
+</div>
+

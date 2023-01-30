@@ -1,0 +1,129 @@
+
+<p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="!isComponentShown"></p-progressBar>
+<div class="container w-full" *ngIf="isComponentShown">
+  <div class="grid">
+    <div class="col-11 mx-auto flex flex-column gap-3 justify-content-center align-items-center">
+      <div class="col-12 flex flex-row">
+        <div class="col-6 flex justify-content-start align-items-center">
+          <span class="font-bold text-primary"> PRODUCT DETAIL </span>
+        </div>
+        <div class="col-6 flex flex-row justify-content-end align-items-center gap-1">
+          <button pButton class="p-button-sm p-button-raised" label="Save" [disabled]="productForm.invalid" (click)="save()"></button>
+          <button pButton class="p-button-sm p-button-raised p-button-danger" label="Close" (click)="close()"></button>
+        </div>
+      </div>
+      <div class="col-12">
+        <form [formGroup]="productForm" class="col-12 flex flex-column sm:flex-column md:flex-row lg:flex-row xl:flex-row justify-content-start align-items-start" enctype="application/x-www-form-urlencoded | multipart/form-data | text/plain">
+          <div class="col-12 sm:col-12 md:col-4 lg:col-4 xl:col-4 flex flex-column">
+            <div class="col-12">
+              <div class="product-image import-file-layout">
+                <div class="flex justify-content-center align-items-center flex-column" *ngIf="!showImg">
+                  <i class="pi pi-image"></i>
+                  <h5>Browse image to upload</h5>
+                </div>
+                <div class="flex justify-content-center align-items-center" *ngIf="showImg">
+                  <img [src]="imgSource" alt="product-image" class="image-preview"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 sm:col-12 md:col-12 lg:col-6 xl:col-6">
+              <label for="file-upload" class="custom-file-upload">
+                Browse Image
+              </label>
+              <input id="file-upload" multiple name="file-uploader" type="file" (change)="uploadFile($event)" accept="image/*"/>
+              <input type="hidden" formControlName="image" name="image" />
+            </div>
+          </div>
+          <div class="col-12 sm:col-12 md:col-8 lg:col-8 xl:col-8 flex flex-column sm:flex-row md:flex-row lg:flex-row xl:flex-row justify-content-start align-items-start">
+
+            <div class="col-12 sm:col-6 md:col-6 lg:col-6 xl:col-6 flex flex-column justify-content-center align-items-center gap-3">
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <input type="text" formControlName="product_name" name="product_name" class="outline-none w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (productForm.controls.product_name.touched && productForm.controls.product_name.invalid )}" required pInputText /> 
+                  <label for="float-input">Product Name</label>
+                </span>
+              </div>
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <p-dropdown [options]="categories" formControlName="category_id" name="category_id" [filter]="true" filterBy="category_name" class="outline-none w-full p-inputtext-sm" optionLabel="category_name" optionValue="id" styleClass="w-full"></p-dropdown>
+                  <label for="float-input">Select Category</label>
+                </span>
+              </div>
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <p-dropdown [options]="brands" formControlName="brand_id" name="brand_id" [filter]="true" filterBy="brand_name" class="outline-none w-full p-inputtext-sm" optionLabel="brand_name" optionValue="id" styleClass="w-full"></p-dropdown>
+                  <label for="float-input">Select Brand</label>
+                </span>
+              </div>
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <p-dropdown [options]="suppliers" formControlName="supplier_id" name="supplier_id" [filter]="true" filterBy="supplier_name" class="outline-none w-full p-inputtext-sm" optionLabel="supplier_name" optionValue="id" styleClass="w-full"></p-dropdown>
+                  <label for="float-input">Select Supplier</label>
+                </span>
+              </div>
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <textarea formControlName="description" name="description" rows="2" class="outline-none w-full p-inputtext-sm" pInputTextarea [autoResize]="true"></textarea>
+                  <label for="float-input">Product Description</label>
+                </span>
+              </div>
+
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-6 lg:col-6 xl:col-6 flex flex-column justify-content-center align-items-center gap-3">
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <input type="text" formControlName="base_price" name="base_price" class="outline-none w-full p-inputtext-sm" required pInputText /> 
+                  <label for="float-input">Base Price</label>
+                </span>
+              </div>
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <input type="text" formControlName="selling_price" name="selling_price" class="outline-none w-full p-inputtext-sm" required pInputText /> 
+                  <label for="float-input">Selling Price</label>
+                </span>
+              </div>
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <input type="text" formControlName="quantity" name="quantity" class="outline-none w-full p-inputtext-sm" required pInputText /> 
+                  <label for="float-input">Quantity</label>
+                </span>
+              </div>
+
+              <div class="col-12">
+                <span class="p-float-label">
+                  <p-dropdown [options]="units" formControlName="unit" name="unit" class="outline-none w-full p-inputtext-sm" optionLabel="label" optionValue="value" styleClass="w-full"></p-dropdown>
+                  <label for="float-input">Select Unit</label>
+                </span>
+              </div>
+
+              <div class="col-12 px-3 py-3">
+                <p-checkbox formControlName="is_active" name="is_active" [binary]="true" inputId="binary"></p-checkbox>
+                <label for="binary" class="p-1"> {{ productForm.value.is_active == true ? 'Active' : 'Deactive' }}</label> 
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-12 px-4 py-2">
+      <p-tabView class="w-full">
+        <p-tabPanel header="STOCK IN">
+          <app-product-stock-in [product]="product"></app-product-stock-in>
+        </p-tabPanel>
+        <p-tabPanel header="STOCK RETURN">
+          <app-product-stock-return [product]="product"></app-product-stock-return>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>

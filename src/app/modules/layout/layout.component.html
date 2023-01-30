@@ -1,0 +1,18 @@
+
+<p-toast position="top-center"></p-toast>
+<p-confirmDialog [style]="{width: '40vw', minWidth: '465px'}" [baseZIndex]="10000" position="top"
+acceptButtonStyleClass="p-button-sm primary" acceptIcon="" rejectIcon="" acceptLabel="" rejectLabel="">
+</p-confirmDialog>
+<app-top-bar (menuButtonClick)="onMenuButtonClick()"></app-top-bar>
+<div class="layout-wrapper">
+
+    <app-sidebar [active]="menuActive"></app-sidebar>
+    <div class="layout-mask" [ngClass]="{'layout-mask-active': menuActive}" (click)="onMaskClick()"></div>
+    <div class="layout-content" style="padding-bottom: 6rem;">
+        <div *ngIf="items.length > 0 ? true : false">
+            <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+        </div>
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+    </div>
+</div>

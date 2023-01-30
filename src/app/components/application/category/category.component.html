@@ -1,0 +1,60 @@
+
+
+<div class="container max-w-full fadein animation-duration-2000">
+  <div class="grid">
+    <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
+      <div class="col-12 flex justify-content-center aling-items-center flex-row flex-wrap">
+        <div class="col-12 md:col-3 lg:col-3 xl:col-3 flex justify-content-start align-items-center">
+          <h3 class="text-primary text-xl uppercase"> Categories </h3>
+        </div>
+        <div class="col-12 md:col-6 lg:col-6 xl:col-6 flex justify-content-center align-items-center">
+          <div class="p-inputgroup">
+            <input type="text" class="p-inputtext-sm" [(ngModel)]="keywords" pInputText placeholder="Search...">   
+            <button pButton type="button" class="p-button-sm p-button-raised" icon="pi pi-search" (click)="search()"></button>      
+          </div>
+        </div>
+        <div class="col-12 md:col-3 lg:col-3 xl:col-3 flex justify-content-end align-items-center">
+          <button pButton type="button" label="Add Category" (click)="addCategory()" icon="pi pi-plus" class="p-button-raised p-button-primary p-button-sm"></button>
+        </div>
+      </div>
+      <div class="col-12">
+        <p-table [value]="categories" (onLazyLoad)="showCategoryLazyLoad($event)" [loading]="loading" [lazy]="true"
+        [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+              <tr class="text-md">
+                  <th pResizableColumn style="width: 5%;">NO</th>
+                  <th pResizableColumn>CATEGORY NAME</th>
+                  <th pResizableColumn>DESCRIPTION</th>
+                  <th pResizableColumn>STATUS</th>
+                  <th pResizableColumn style="width: 15%;">ENCODED BY</th>
+                  <th pResizableColumn style="text-align: center; width: 5%;">EDIT</th>
+                  <th pResizableColumn style="text-align: center; width: 5%;">DELETE</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-category let-i="rowIndex">
+              <tr class="text-sm">
+                  <td> {{ i + 1 }}</td>
+                  <td>{{category.category_name | titlecase }}</td>
+                  <td>{{category.description  }}</td>
+                  <td [ngClass]="{'text-red-600' : !category.is_active }" class="text-teal-500">{{category.is_active == 1 ? 'Actived' : 'Disabled' }}</td>
+                  <td>{{category.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+                  <td><button pButton type="button" label="Edit" (click)="updateCategory(category)" icon="pi pi-pencil" class="p-button-text p-button-primary p-button-sm text-xs"></button></td>
+                  <td><button pButton type="button" label="Delete" (click)="deleteCategory(category.id)" icon="pi pi-trash" class="p-button-text p-button-danger p-button-sm text-xs"></button></td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="col-12">
+        <button pButton pRipple type="button" label="<<" class="p-button-text paginator" id="firstPage" (click)="firstPage()"></button>
+        <button pButton pRipple type="button" label="<" class="p-button-text paginator" id="prevPage" (click)="prevPage()"></button>
+        <button pButton pRipple type="button" [label]="page_detail" class="p-button-text paginator" disabled></button>
+        <button pButton pRipple type="button" label=">" class="p-button-text paginator" id="nextPage" (click)="nextPage()"></button>
+        <button pButton pRipple type="button" label=">>" class="p-button-text paginator" id="lastPage" (click)="lastPage()"></button>
+      </div>
+      <!-- <div class="sm:col-12 md:col-12 lg:col-6 xl:col-4">
+        <pagination-controls class="text-left p-2" [responsive]="true" (pageChange)="pageChangeEvent($event)"></pagination-controls>
+      </div> -->
+    </div>
+  </div>
+</div>
+

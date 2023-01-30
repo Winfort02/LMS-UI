@@ -1,0 +1,55 @@
+<div class="container max-w-full fadein animation-duration-2000">
+  <div class="grid">
+    <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
+      <div class="col-12 flex flex-column sm:flex-column md:flex-row lg:flex-row xl:flex-row flex-wrap row-gap-3">
+
+        <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+          <span class="p-float-label">
+            <p-calendar inputId="basic" [(ngModel)]="start_date"
+              styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" ></p-calendar>
+            <label for="inputtext" class="p-text-sm">START DATE </label>
+          </span>
+        </div>
+        <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+          <span class="p-float-label">
+            <p-calendar inputId="basic" [(ngModel)]="end_date"
+              styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" ></p-calendar>
+            <label for="inputtext" class="p-text-sm">END DATE </label>
+          </span>
+        </div>
+        <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+          <span class="p-float-label">
+            <p-dropdown [options]="payment_types" optionLabel="label" [(ngModel)]="payment_type" optionValue="value" styleClass="w-full p-inputtext-sm" ></p-dropdown>
+            <label for="float-input" class="text-xs">SELECT PAYMENT TYPES</label>
+          </span>
+        </div>
+        <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+          <span class="p-float-label">
+            <p-dropdown [options]="order_statuses" [(ngModel)]="order_status" styleClass="outline-none w-full p-inputtext-sm" optionLabel="label" optionValue="value" ></p-dropdown>
+            <label for="float-input" class="text-xs">SELECT ORDER STATUS</label>
+          </span>
+        </div>
+        <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2">
+          <span class="p-float-label">
+            <p-dropdown [options]="payment_statuses" [(ngModel)]="payment_status" styleClass="outline-none w-full p-inputtext-sm" optionLabel="label" optionValue="value" ></p-dropdown>
+            <label for="float-input" class="text-xs">SELECT PAYMENT STATUS</label>
+          </span>
+        </div>
+        <div class="col-12 sm:col-12 md:col-4 lg:col-2 xl:col-2 flex justify-content-end gap-2">
+          <button pButton type="button" label="Generate Report" (click)="generate()" class="p-button-raised p-button-primary p-button-sm"></button>
+
+          <button pButton type="button" label="Close" (click)="close()" class="p-button-raised p-button-danger p-button-sm"></button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <hr class="w-full" />
+    </div>
+    <div class="col-12">
+      <p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="isProgressBarShown"></p-progressBar>
+    </div>
+    <div class="col-12">
+      <ngx-doc-viewer [url]="pdfURL" viewer="pdf" style="width:100%; height:100vh;"></ngx-doc-viewer>
+    </div>
+  </div>
+</div>

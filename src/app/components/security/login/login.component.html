@@ -1,0 +1,41 @@
+<p-toast position="top-center"></p-toast>
+
+<div class="container w-full fadein animation-duration-2000">
+  <p-toast position="top-center"></p-toast>
+  <div class="grid">
+    <div class="col-12 flex flex-wrap justify-content-around align-items-center flex-column-reverse sm:flex-column-reverse md:flex-row lg:flex-row xl:flex-row pt-5">
+      <div class="col-12 sm:col-12 md:col-6 lg:col-4 card shadow-4">
+        <div class="col-12 flex justify-content-center align-items-center p-3">
+          <h3 class="text-primary text-center"> LOGIN </h3>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="loginForm">
+            <div class="col-12 flex justify-content-center align-items-center flex-column gap-3">
+              <div class="col-12">
+                <span class="p-float-label">
+                  <input type="email" formControlName="username" name="username" class="outline-none w-full" [ngClass]="{'ng-invalid ng-dirty' : (loginForm.controls.username.touched && loginForm.controls.username.invalid )}" required pInputText /> 
+                  <label for="float-input">Ussername / Email :</label>
+                </span>
+              </div>
+              <div class="col-12">
+                <span class="p-float-label">
+                  <input type="password" formControlName="password" name="password" class="outline-none w-full" required pInputText> 
+                  <label for="float-input">Password :</label>
+                </span>
+              </div>
+              <div class="col-12 flex justify-content-between align-items-center flex-row">
+                <button pButton type="button" label="Login" [disabled]="loginForm.invalid" (click)="signIn()" class="p-button-raised p-button-primary p-button-sm w-full outline-none"></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-8 md:col-6 pt-5">
+        <div class="col-12 flex justify-content-center align-items-center pt-5">
+          <img src="../../../../assets/images/login-bg.svg" alt="background-img" class="w-full mt-5">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
