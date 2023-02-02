@@ -14,5 +14,5 @@ export class StockReturnModel {
   van_number: string = '';
   date: any;
   quantity: number = 0;
-  remarks: string = '';
+  remarks: string = '-';
 }

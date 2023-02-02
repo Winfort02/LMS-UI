@@ -23,7 +23,8 @@ export class CustomerDetailComponent implements OnInit {
   gender_option: Array<{label: string, value: string}> = [
     {label: 'Select', value: ''},
     {label: 'Male', value: 'Male'},
-    {label: 'Female', value: 'Female'}
+    {label: 'Female', value: 'Female'},
+    {label: 'Other', value: 'Other'}
   ];
 
 
