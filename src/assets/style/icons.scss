@@ -1,0 +1,151 @@
+.lms-customer {
+  // width:100px;
+  display:block;
+  width: 150px;
+  height: 150px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-customer:after {
+  content: '';
+    background:url('../images/customers-icon-35912.png') no-repeat 0px 0px;
+    background-position: center;
+    // background-size: cover;
+    background-size: contain;
+    position:absolute;
+    max-width: 100%;
+    width: 150px;
+    height: 150px;
+    margin-left:-20px;
+}
+
+
+.lms-pos {
+  // width:100px;
+  display:block;
+  width: 150px;
+  height: 150px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-pos:after {
+  content: '';
+    background:url('../images/point-of-sale-icon-10672.png') no-repeat 0px 0px;
+    background-position: center;
+    // background-size: cover;
+    background-size: contain;
+    position:absolute;
+    max-width: 100%;
+    width: 150px;
+    height: 150px;
+    margin-left:-20px;
+}
+
+
+.lms-print-sales {
+  // width:100px;
+  display:block;
+  width: 150px;
+  height: 150px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-print-sales:after {
+  content: '';
+    background:url('../images/printer-icon-1023.png') no-repeat 0px 0px;
+    background-position: center;
+    // background-size: cover;
+    background-size: contain;
+    position:absolute;
+    max-width: 100%;
+    width: 150px;
+    height: 150px;
+    margin-left:-20px;
+}
+
+.lms-product-list {
+  // width:100px;
+  display:block;
+  width: 150px;
+  height: 150px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-product-list:after {
+  content: '';
+    background:url('../images/task-manager-icon-37724.png') no-repeat 0px 0px;
+    background-position: center;
+    // background-size: cover;
+    background-size: contain;
+    position:absolute;
+    max-width: 100%;
+    width: 150px;
+    height: 150px;
+    margin-left:-20px;
+}
+
+.lms-product-report {
+  // width:100px;
+  display:block;
+  width: 150px;
+  height: 150px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-product-report:after {
+  content: '';
+    background:url('../images/report-icon-13342.png') no-repeat 0px 0px;
+    background-position: center;
+    // background-size: cover;
+    background-size: contain;
+    position:absolute;
+    max-width: 100%;
+    width: 150px;
+    height: 150px;
+    margin-left:-20px;
+}
+
+.lms-sales-report {
+  // width:100px;
+  display:block;
+  width: 150px;
+  height: 150px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-sales-report:after {
+  content: '';
+    background:url('../images/report-icon-13326.png') no-repeat 0px 0px;
+    background-position: center;
+    // background-size: cover;
+    background-size: contain;
+    position:absolute;
+    max-width: 100%;
+    width: 150px;
+    height: 150px;
+    margin-left:-20px;
+}

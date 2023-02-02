@@ -32,6 +32,9 @@ export class TopBarComponent implements OnInit {
     private router: Router
   ) {
 
+    setInterval(() => {
+      this.dateToday = new Date();
+    }, 1000);
   }
 
   logout() {
