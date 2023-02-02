@@ -48,7 +48,7 @@ export class CustomerDetailComponent implements OnInit {
     this.customer.is_active = this.customer.is_active == true ? true : false;
     this.customerForm = this.formBuilder.group({
       id: [this.customer.id],
-      customer_name: [this.customer.customer_name, [Validators.required, Validators.pattern(validations.nameValidation)]],
+      customer_name: [this.customer.customer_name, [Validators.required]],
       email: [this.customer.email],
       phone_number: [this.customer.phone_number, [Validators.required]],
       address: [this.customer.address, [Validators.required]],
