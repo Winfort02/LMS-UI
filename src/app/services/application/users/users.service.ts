@@ -58,6 +58,13 @@ export class UsersService {
     catchError(this.httpError))
   }
 
+  changePassword(data: any) { 
+    return this.http.post<UserModel>(`${DEFAULT_URL}/api/users/change-password`, data, httpOptions).pipe(
+      shareReplay(1),
+      catchError(this.httpError)
+    );
+  }
+
   httpError(error: HttpErrorResponse) {
     return throwError(error);
   }

@@ -80,8 +80,8 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       name: [this.user.name, [Validators.required]],
       username: [this.user.username, [Validators.required]],
       email: [this.user.email, [Validators.required, Validators.pattern(validations.emailValidation)]],
-      password: [this.user.password, [Validators.required, Validators.pattern(validations.passwordValidation)]],
-      password_confirmation: [this.user.password_confirmation, [Validators.required, Validators.pattern(validations.passwordValidation)]],
+      password: [this.user.password, [Validators.required]],
+      password_confirmation: [this.user.password_confirmation, [Validators.required]],
       user_type: [this.user.user_type, [Validators.required]],
       is_active: [this.user.is_active, [Validators.required]],
     });

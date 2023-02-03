@@ -11,6 +11,8 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserModel } from 'src/app/models/user.model';
 import { async } from 'rxjs';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ChangePasswordComponent } from '../../application/change-password/change-password.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -100,7 +102,9 @@ export class SidebarComponent implements OnInit {
     private router: Router,
     private confirmService: ConfirmationService,
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dialogRef: DynamicDialogRef,
+    private dialogService: DialogService
   ) { 
     this.current_user = this.authService.currentUser;
   }
@@ -270,6 +274,11 @@ export class SidebarComponent implements OnInit {
           icon: 'pi pi-cog',
           items: [
             {
+              label: 'Change Password',
+              icon: 'pi pi-shield',
+              command: (event) => {this.changePassword()}
+            },
+            {
                 label: 'End Session',
                 icon: 'pi pi-power-off',
                 command: (event) => {this.logout()}
@@ -331,241 +340,66 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  changePassword() {
+    this.dialogRef = this.dialogService.open(ChangePasswordComponent, {
+      header: 'CHANGE PASSWORD',
+      styleClass: 'text-sm text-primary',
+      width: '480px',
+      contentStyle: { "max-height": "600px", "overflow": "auto", "border-bottom-left-radius": "6px", "border-bottom-right-radius": "6px" },
+      baseZIndex: 10000,
+      style: { 
+        'align-self': 'flex-start', 
+        'margin-top': '50px' 
+      }
+    });
+
+    this.dialogRef.onClose.subscribe((response: any) => {
+
+      if(response) {
+        if(response.success) {
+          this.messageService.add({
+            severity: 'custom',
+            detail: 'Password change successfully',
+            life: 1500,
+            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            contentStyleClass: 'p-2 text-sm'
+          });
+
+            setTimeout(() => {
+              this.authService.logout(this.authService.currentUser).subscribe({
+                next: async (response: any) => {
+                  localStorage.clear();
+                  location.replace('/security/login');
+                },
+                error: (error) => {
+                  this.messageService.add({
+                    severity: 'custom',
+                    detail: '' + error.error.message,
+                    life: 1500,
+                    styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+                    contentStyleClass: 'p-2 text-sm'
+                  });
+                }
+              })
+              
+          }, 1000);
+        } else {
+          this.messageService.add({
+            severity: 'custom',
+            detail: '' + response.data.error.message,
+            life: 1500,
+            styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+            contentStyleClass: 'p-2 text-sm'
+          });
+        }
+      } else {
+        return;
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.loadModules();
-    // this.sideItems = [
-    //   {
-    //     label: 'Dashboard',
-    //     icon:'berben-icon-dashboard',
-    //     expanded: this.checkActiveState('/dashboard'),
-    //     items: [
-    //         {
-    //             label: 'Storage Dashboard',
-    //             icon:'fa-solid fa-chart-pie',
-    //             routerLink: '/dashboard/storage'
-    //         },
-    //         {
-    //             label: 'Dispatching Dashboard',
-    //             icon:'fa-solid fa-dolly',
-    //             routerLink: '/dashboard/receiving-dispaching' 
-    //         },
-    //         {
-    //             label: 'Dispatching Location',
-    //             icon:'fa-solid fa-boxes-packing',
-    //             routerLink: '/dashboard/dispatch-location'
-    //         },
-    //         {
-    //           label: 'Yard Management Dashboard',
-    //           icon:'fa-solid fa-warehouse',
-    //           routerLink: '/dashboard/yard-management'
-    //         },
-    //         {
-    //             label: 'Branch Management Dashboard',
-    //             icon:'fa-solid fa-balance-scale',
-    //             routerLink: '/dashboard/branch-management'
-    //         },
-    //         {
-    //           label: 'Warehouse Business Insights',
-    //           icon:'fa-solid fa-chart-area',
-    //           routerLink: '/dashboard/warehouse-business-insight'
-    //         }
-    //     ]
-    //   },
-    //   {
-    //   label: 'Sales and Marketing',
-    //   icon:'berben-icon-sales',
-    //   expanded: this.checkActiveState('/sales/'),
-    //   items: [
-    //       {
-    //           label: 'Customers',
-    //           icon:'fa-solid fa-user-tie',
-    //           routerLink: '/sales/customers'
-    //       },
-    //       {
-    //           label: 'Services',
-    //           icon:'fa-solid fa-briefcase',
-    //           routerLink: '/sales/services'
-    //       },
-    //       {
-    //           label: 'Reports',
-    //           icon:'fa-solid fa-chalkboard-teacher',
-    //           routerLink: '/sales/reports'
-    //       }
-    //     ]
-    //   },
-    //   {
-    //   label: 'Yard Management',
-    //   icon:'berben-icon-yard',
-    //   expanded: this.checkActiveState('/yards'),
-    //   items: [
-    //       {
-    //           label: 'Loading Docks',
-    //           icon:'fa-solid fa-luggage-cart',
-    //           routerLink: '/yards/loading-docks'
-
-    //       },
-    //       {
-    //           label: 'Plugin Stations',
-    //           icon:'fa-solid fa-door-open',
-    //           routerLink: '/yards/plugin-stations'
-    //       },
-    //       {
-    //         label: 'Truck Arrival Request (TR)',
-    //         icon:'fa-solid fa-truck-medical',
-    //         routerLink: '/yards/truck-arrival-request'
-    //       },
-    //       {
-    //         label: 'Truck Arrival (TA)',
-    //         icon:'fa-solid fa-truck',
-    //         routerLink: '/yards/truck-arrival'
-    //       },
-    //       {
-    //         label: 'Reports',
-    //         icon:'fa-solid fa-chalkboard-teacher',
-    //         routerLink: '/yards/reports'
-    //       },
-    //   ]
-    //   },
-    //   {
-    //   label: 'Receiving',
-    //   icon:'berben-icon-receiving',
-    //   expanded: this.checkActiveState('/receiving/'),
-    //   items: [
-    //       {
-    //           label: 'Customer Material',
-    //           icon:'fa-solid fa-users-cog',
-    //           routerLink: '/receiving/customer-material'
-    //       },
-    //       {
-    //           label: 'Storage Rooms',
-    //           icon:'fa-solid fa-boxes',
-    //           routerLink: '/receiving/storage-rooms'
-    //       },
-    //       {
-    //         label: 'Warehouse Receiving (WR)',
-    //         icon:'fa-solid fa-truck-loading',
-    //         routerLink: '/receiving/warehouse-receivings'
-    //       },
-    //       {
-    //         label: 'Put Away (PA)',
-    //         icon:'fa-solid fa-trailer',
-    //         routerLink: '/receiving/put-aways'
-    //       },
-    //       {
-    //         label: 'Reports',
-    //         icon:'fa-solid fa-chalkboard-teacher',
-    //         routerLink: '/receiving/reports'
-    //       }
-    //     ]
-    //   },
-    //   {
-    //   label: 'Storage',
-    //   icon:'berben-icon-storage',
-    //   expanded: this.checkActiveState('/storage/'),
-    //   items: [
-    //       {
-    //           label: 'Bin To Bin',
-    //           icon:'fa-solid fa-exchange-alt',
-    //           routerLink: '/storage/bin-to-bin'
-    //       },
-    //       {
-    //           label: 'Partial Bin',
-    //           icon:'fa-solid fa-cube',
-    //           routerLink: '/storage/partial-bin'
-    //       },
-    //       {
-    //         label: 'Physical Count',
-    //         icon:'fa-solid fa-clipboard-list',
-    //         routerLink: '/storage/physical-count' 
-    //       },
-    //       {
-    //         label: 'Reports',
-    //         icon:'fa-solid fa-chalkboard-teacher',
-    //         routerLink: '/storage/reports'
-    //       }
-    //     ]
-    //   },
-    //   {
-    //   label: 'Dispatching',
-    //   icon:'berben-icon-dispatching',
-    //   expanded: this.checkActiveState('/dispatching/'),
-    //   items: [
-    //       {
-    //           label: 'Transfer Request',
-    //           icon:'fa-solid fa-expand-alt',
-    //           routerLink: '/dispatching/transfer-requests'
-    //       },
-    //       {
-    //           label: 'Dispatch Request',
-    //           icon:'fa-solid fa-dolly',
-    //           routerLink: '/dispatching/dispatch-requests'
-    //       },
-    //       {
-    //         label: 'Pick List',
-    //         icon:'fa-solid fa-th-list',
-    //         routerLink: '/dispatching/pick-lists'
-    //       },
-    //       {
-    //         label: 'Dispatch Order',
-    //         icon:'fa-solid fa-dolly-flatbed',
-    //         routerLink: '/dispatching/dispatch-orders'
-    //       },
-    //       {
-    //         label: 'Reports',
-    //         icon:'fa-solid fa-chalkboard-teacher',
-    //         routerLink: '/dispatching/reports'
-    //       }
-    //     ]
-    //   },
-    //   {
-    //   label: 'Administration',
-    //   icon:'berben-icon-admin',
-    //   expanded: this.checkActiveState('/admin/'),
-    //   items: [
-    //       {
-    //           label: 'Modules',
-    //           icon:'fa-solid fa-diagram-project',
-    //           routerLink: '/admin/modules'
-    //       },
-    //       {
-    //           label: 'Users',
-    //           icon:'fa-solid fa-users',
-    //           routerLink: '/admin/users'
-    //       },
-    //       {
-    //         label:' Companies',
-    //         icon:'fa-solid fa-building',
-    //         routerLink: '/admin/companies'
-    //       },
-    //       {
-    //         label: 'Branches',
-    //         icon:'fa-solid fa-code-branch',
-    //         routerLink: '/admin/branches'
-    //       },
-    //       {
-    //         label: 'Storages',
-    //         icon:'fa-solid fa-boxes',
-    //         routerLink: '/admin/storages'
-    //       },
-    //       {
-    //         label: 'Materials',
-    //         icon:'fa-solid fa-toolbox',
-    //         routerLink: '/admin/materials'
-    //       },
-    //       {
-    //         label: 'Selections',
-    //         icon:'fa-regular fa-object-ungroup',
-    //         routerLink: '/admin/selections'
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     label: 'End Session',
-    //     icon:'fa-solid fa-power-off',
-    //     routerLink: '/admin/modules',
-    //     command: (event) => {this.logout()}
-    //     }
-    // ]
   }
 
 }

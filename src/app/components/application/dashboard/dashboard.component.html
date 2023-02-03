@@ -134,7 +134,7 @@
           </div>
           <div class="col-12 flex flex-column justify-content-start align-items-start row-gap-3" *ngIf="products.length">
             <p-table [value]="products" (onLazyLoad)="showAllSalesOrder($event)" [loading]="loading" [lazy]="true"
-            [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll" style="width: 100%;">
+            [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll">
               <ng-template pTemplate="header">
                   <tr class="text-sm">
                       <th pResizableColumn>PRODUCT</th>
