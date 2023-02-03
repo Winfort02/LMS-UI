@@ -328,6 +328,11 @@ export class SidebarComponent implements OnInit {
           icon: 'pi pi-cog',
           items: [
             {
+              label: 'Change Password',
+              icon: 'pi pi-shield',
+              command: (event) => {this.changePassword()}
+            },
+            {
                 label: 'End Session',
                 icon: 'pi pi-power-off',
                 command: (event) => {this.logout()}
