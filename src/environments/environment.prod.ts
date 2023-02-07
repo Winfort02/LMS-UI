@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  http_url: "192.168.1.13:8000",
-  imgUrl: '192.168.1.13:8000'
+  http_url: "http://127.0.0.1:8000",
+  imgUrl: 'http://127.0.01:8000'
 };
