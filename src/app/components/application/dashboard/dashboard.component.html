@@ -132,9 +132,9 @@
           <div class="col-12">
             <h5 class="text-sm text-center"> PRODUCT WITH LOW QUANTITY </h5>
           </div>
-          <div class="col-12 flex flex-column justify-content-start align-items-start row-gap-3" *ngIf="products.length">
+          <div class="col-12" *ngIf="products.length">
             <p-table [value]="products" (onLazyLoad)="showAllSalesOrder($event)" [loading]="loading" [lazy]="true"
-            [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll">
+            [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped w-full" responsiveLayout="scroll">
               <ng-template pTemplate="header">
                   <tr class="text-sm">
                       <th pResizableColumn>PRODUCT</th>
@@ -145,7 +145,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-product let-i="rowIndex">
                   <tr class="text-sm">
-                      <td>{{product.product_name }}</td>
+                      <td>{{product.product_name + ' ' + product.description }}</td>
                       <td>{{product.brands?.brand_name }}</td>
                       <td>{{product.quantity }}</td>
                       <td [ngClass]="{'text-orange-500' : (product.quantity <= 10 && product.quantity > 0),'text-red-500': product.quantity === 0}">{{ product.quantity > 0 ? 'AVAILABLE' : 'OUT OF STOCK' }}</td>

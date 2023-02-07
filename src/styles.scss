@@ -24,6 +24,18 @@ body {
   }
 }
 
+.product_report {
+  .p-dropdown-items {
+    width: 100% !important;
+    max-width: 300px !important;
+    overflow-x: scroll !important;
+  
+    .p-dropdown-item {
+      width: 450px !important;
+    }
+  }
+}
+
 
 .order-detail {
   .p-dropdown-items {
