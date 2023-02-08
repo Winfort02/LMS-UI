@@ -78,6 +78,7 @@ import { ProductStockInReportComponent } from 'src/app/public/components/product
 import { PlaceOrderDetailComponent } from 'src/app/public/components/place-order-detail/place-order-detail.component';
 import { StockReturnReportComponent } from 'src/app/public/components/stock-return-report/stock-return-report.component';
 import { ChangePasswordComponent } from 'src/app/components/application/change-password/change-password.component';
+import { ResetPasswordComponent } from 'src/app/components/application/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { ChangePasswordComponent } from 'src/app/components/application/change-p
     ProductStockInReportComponent,
     PlaceOrderDetailComponent,
     StockReturnReportComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -162,4 +164,5 @@ import { ChangePasswordComponent } from 'src/app/components/application/change-p
     Location
   ]
 })
+
 export class ApplicationModule { }

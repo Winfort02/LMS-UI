@@ -8,6 +8,7 @@
           <span class="font-bold text-primary"> USER DETAIL </span>
         </div>
         <div class="col-6 flex flex-row justify-content-end align-items-center gap-1">
+          <button pButton class="p-button-sm p-button-raised" label="Change Password" (click)="resetPassword()" *ngIf="user.id"></button>
           <button pButton class="p-button-sm p-button-raised" label="Save" [disabled]="userForm.invalid" (click)="save()"></button>
           <button pButton class="p-button-sm p-button-raised p-button-danger" label="Close" (click)="close()"></button>
         </div>

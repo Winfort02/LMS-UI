@@ -54,8 +54,8 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
           setTimeout(() => {
             if(this.authService.isLogin()) {
-              location.replace('/application');
-              // location.reload();
+              // location.replace('/application');
+              location.reload();
             }
           }, 1000);
         },

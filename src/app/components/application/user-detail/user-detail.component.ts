@@ -14,6 +14,7 @@ import { PaginationModel } from 'src/app/models/pagination.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SalesOrderPdfComponent } from 'src/app/public/components/sales-order-pdf/sales-order-pdf.component';
 import { UpdateOrderDetailComponent } from '../update-order-detail/update-order-detail.component';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -299,6 +300,46 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   close() {
     this.router.navigate(['/application/users']);
+  }
+
+  resetPassword() {
+    this.dialogRef = this.dialogService.open(ResetPasswordComponent, {
+      header: 'RESET PASSWORD',
+      styleClass: 'text-sm text-primary',
+      width: '480px',
+      contentStyle: { "max-height": "600px", "overflow": "auto", "border-bottom-left-radius": "6px", "border-bottom-right-radius": "6px" },
+      baseZIndex: 10000,
+      data: this.user.id as number,
+      style: { 
+        'align-self': 'flex-start', 
+        'margin-top': '50px' 
+      }
+    });
+
+    this.dialogRef.onClose.subscribe((response: any) => {
+
+      if(response) {
+        if(response.success) {
+          this.messageService.add({
+            severity: 'custom',
+            detail: 'Password change successfully',
+            life: 1500,
+            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            contentStyleClass: 'p-2 text-sm'
+          });
+        } else {
+          this.messageService.add({
+            severity: 'custom',
+            detail: '' + response.data.error.message,
+            life: 1500,
+            styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+            contentStyleClass: 'p-2 text-sm'
+          });
+        }
+      } else {
+        return;
+      }
+    })
   }
 
   ngOnDestroy(): void {

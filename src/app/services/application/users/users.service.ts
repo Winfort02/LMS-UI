@@ -65,6 +65,13 @@ export class UsersService {
     );
   }
 
+  resetPassword(data: any, id: number) { 
+    return this.http.post<UserModel>(`${DEFAULT_URL}/api/users/reset-password/${id}`, data, httpOptions).pipe(
+      shareReplay(1),
+      catchError(this.httpError)
+    );
+  }
+
   httpError(error: HttpErrorResponse) {
     return throwError(error);
   }
