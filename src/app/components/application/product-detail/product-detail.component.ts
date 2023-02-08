@@ -46,7 +46,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     {label: 'Pcs', value: 'Pcs'},
     {label: 'Kg', value: 'Kg'},
     {label: 'Sacks', value: 'Sacks'},
-    {label: 'Roll', value: 'Roll'}
+    {label: 'Roll', value: 'Roll'},
+    {label: 'Meter', value: 'Meter'},
+    {label: 'Feet', value: 'Feet'},
   ];
 
   constructor(

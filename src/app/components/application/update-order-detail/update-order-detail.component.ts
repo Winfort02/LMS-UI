@@ -73,7 +73,7 @@ export class UpdateOrderDetailComponent implements OnInit {
       order_status: [this.order.order_status, [Validators.required]],
       payment: [0, [Validators.required]],
       current_payment: [this.order.payment, [Validators.required]],
-      remaining_balance: [this.order.total_amount - this.order.payment, [Validators.required]],
+      remaining_balance: [(this.order.total_amount - this.order.payment) > 0 ? (this.order.total_amount - this.order.payment) : 0, [Validators.required]],
       remarks: [this.order.remarks, [Validators.required]],
       status: [this.order.status, [Validators.required]]
     });
