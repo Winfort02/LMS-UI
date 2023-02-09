@@ -10,6 +10,7 @@ import { UpdateOrderDetailComponent } from '../update-order-detail/update-order-
 import { SalesOrderPdfComponent } from 'src/app/public/components/sales-order-pdf/sales-order-pdf.component';
 import { CustomerModel } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/application/customer/customer.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-order',
@@ -17,6 +18,9 @@ import { CustomerService } from 'src/app/services/application/customer/customer.
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit, OnDestroy {
+
+  start_date: any = new Date();
+  end_date: any = new Date();
 
   keywords: string = '';
   loading: boolean = true;
@@ -41,7 +45,8 @@ export class OrderComponent implements OnInit, OnDestroy {
     private dialogRef: DynamicDialogRef,
     private dialogService: DialogService,
     private activeRoute: ActivatedRoute,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private datePipe: DatePipe
   ) { }
 
 
@@ -101,7 +106,9 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   getAllSalesOrder(page: string) {
     this.loading = true;
-    this.sales_order_subscription = this.orderService.showAllSalesOrderPaginate(page, this.keywords, this.customer_id).subscribe({
+    this.start_date = this.datePipe.transform(this.start_date, 'Y-MM-dd');
+    this.end_date = this.datePipe.transform(this.end_date, 'Y-MM-dd');
+    this.sales_order_subscription = this.orderService.showAllSalesOrderPaginate(page, this.keywords, this.customer_id, this.start_date, this.end_date).subscribe({
       next: async (response: any) => {
         // Pagination #2 
         this.pagination = response;
@@ -211,6 +218,10 @@ export class OrderComponent implements OnInit, OnDestroy {
   close() {
     let returnUrl = this.activeRoute.snapshot.queryParamMap.get('returnUrl') || '/application';
     this.router.navigateByUrl(returnUrl)
+  }
+
+  onSelectDate() {
+    this.getAllSalesOrder(this.pagination.first);
   }
 
   ngOnDestroy(): void {

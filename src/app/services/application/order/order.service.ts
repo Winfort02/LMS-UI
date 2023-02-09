@@ -32,8 +32,8 @@ export class OrderService {
   ) { }
 
 
-  showAllSalesOrderPaginate(page: string, keywords: string, customer_id: number) : Observable<Array<OrderModel>> {
-    return this.http.get<Array<OrderModel>>(`${DEFAULT_URL}/api/orders?${page}&keywords=${keywords}&customer_id=${customer_id}`, httpOptions).pipe(shareReplay(1), catchError(this.httpError));
+  showAllSalesOrderPaginate(page: string, keywords: string, customer_id: number, start_date: string, end_date: string) : Observable<Array<OrderModel>> {
+    return this.http.get<Array<OrderModel>>(`${DEFAULT_URL}/api/orders?${page}&keywords=${keywords}&customer_id=${customer_id}&start_date=${start_date}&end_date=${end_date}`, httpOptions).pipe(shareReplay(1), catchError(this.httpError));
   }
 
   showOrderByUserPaginate(page: string, keywords: string, start_date: string, end_date: string, id: number) : Observable<Array<OrderModel>> {
