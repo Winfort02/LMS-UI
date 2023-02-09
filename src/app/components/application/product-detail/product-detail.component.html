@@ -115,7 +115,7 @@
       </div>
     </div>
 
-    <div class="col-12 px-4 py-2">
+    <div class="col-12 px-4 py-2" *ngIf="product.id">
       <p-tabView class="w-full">
         <p-tabPanel header="STOCK IN">
           <app-product-stock-in [product]="product"></app-product-stock-in>
