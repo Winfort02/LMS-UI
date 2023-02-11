@@ -7,6 +7,8 @@ export class validations {
 
   public static numberValidation: string = "^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$";
 
+  public static price: string = "^([0-9]*|[0-9]*[.]{1}[0-9]{1,2})?$";
+
   public static passwordValidation: string = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}';
 
   

@@ -38,7 +38,7 @@
                   <th pResizableColumn>PRODUCT</th>
                   <th pResizableColumn>CATEGORY</th>
                   <th pResizableColumn>BRAND</th>
-                  <th pResizableColumn>SUPPLIER</th>
+                  <th pResizableColumn *ngIf="current_user.user_type == 'Admin'">SUPPLIER</th>
                   <th pResizableColumn style="width: 80px;">PRICE</th>
                   <th pResizableColumn style="width: 80px;">QUANTITY</th>
                   <th pResizableColumn style="width: 70px; text-align: center;">STATUS</th>
@@ -59,7 +59,7 @@
                   <td>{{product.product_name | titlecase }} {{ product.description }}</td>
                   <td>{{product.categories.category_name }}</td>
                   <td>{{product.brands.brand_name }}</td>
-                  <td>{{product.suppliers.supplier_name }}</td>
+                  <td *ngIf="current_user.user_type == 'Admin'">{{product.suppliers.supplier_name }}</td>
                   <td class="text-right">{{product.selling_price | currency: 'P '  }}</td>
                   <td class="text-right">{{product.quantity  }}</td>
                   <td [ngClass]="{'text-red-600' : !product.is_active }" class="text-teal-500 text-center">{{product.is_active == 1 ? 'Actived' : 'Disabled' }}</td>

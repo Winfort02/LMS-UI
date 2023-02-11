@@ -9,6 +9,7 @@ import { CategoryModel } from 'src/app/models/category.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { SupplierModel } from 'src/app/models/supplier.model';
 import { UserModel } from 'src/app/models/user.model';
+import { validations } from 'src/app/public/validations';
 import { BrandService } from 'src/app/services/application/brand/brand.service';
 import { CategoryService } from 'src/app/services/application/category/category.service';
 import { CustomerService } from 'src/app/services/application/customer/customer.service';
@@ -80,10 +81,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       supplier_id: [this.product.supplier_id, [Validators.required]],
       product_name: [this.product.product_name, [Validators.required]],
       description: [this.product.description, [Validators.required]],
-      base_price: [this.product.base_price, [Validators.required]],
-      selling_price: [this.product.selling_price, [Validators.required]],
+      base_price: [this.product.base_price, [Validators.required, Validators.pattern(validations.price)]],
+      selling_price: [this.product.selling_price, [Validators.required, Validators.pattern(validations.price)]],
       quantity: [this.product.quantity, [Validators.required]],
-      unit: [this.product.unit, [Validators.required]],
+      unit: [this.units[0].value, [Validators.required]],
       created_by: [this.current_user.name],
       is_active: [this.product.is_active, [Validators.required]],
     });

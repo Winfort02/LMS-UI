@@ -119,6 +119,7 @@ export class UpdateOrderDetailComponent implements OnInit {
   save() {
     if(this.orderForm.valid) {
       this.order = this.orderForm.value;
+      this.order.status = this.orderForm.value.status;
       this.order.sales_date = this.datePipe.transform(this.order.sales_date, 'Y-MM-dd');
       this.orderService.updateSalesOrder(this.order, this.order.id as number).subscribe({
         next: async (response: any) => {
