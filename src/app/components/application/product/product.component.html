@@ -37,7 +37,7 @@
                   <th pResizableColumn style="text-align: center;">IMAGE</th>
                   <th pResizableColumn>PRODUCT</th>
                   <th pResizableColumn>CATEGORY</th>
-                  <th pResizableColumn>BRAND</th>
+                  <th pResizableColumn *ngIf="current_user.user_type == 'Admin'">BRAND</th>
                   <th pResizableColumn *ngIf="current_user.user_type == 'Admin'">SUPPLIER</th>
                   <th pResizableColumn style="width: 80px;">PRICE</th>
                   <th pResizableColumn style="width: 80px;">QUANTITY</th>
@@ -56,9 +56,9 @@
                     ></p-tableCheckbox>
                   </td>
                   <td style="text-align: center; width: 5%;"> <img [src]="imgUrl + product.image" alt="product_image" width="30" height="25" class="product_img"></td>
-                  <td>{{product.product_name | titlecase }} {{ product.description }}</td>
+                  <td>{{product.product_name | titlecase }} {{ product.description }} {{ product.brands.description }}</td>
                   <td>{{product.categories.category_name }}</td>
-                  <td>{{product.brands.brand_name }}</td>
+                  <td *ngIf="current_user.user_type == 'Admin'">{{product.brands.brand_name }}</td>
                   <td *ngIf="current_user.user_type == 'Admin'">{{product.suppliers.supplier_name }}</td>
                   <td class="text-right">{{product.selling_price | currency: 'P '  }}</td>
                   <td class="text-right">{{product.quantity  }}</td>

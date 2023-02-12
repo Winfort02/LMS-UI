@@ -82,7 +82,7 @@
                   <td [ngClass]="{'text-red-600' : !order.status}" class="text-teal-500">{{order.status == 1 ? 'Paid' : 'Pending' }}</td>
                   <td>{{order.user?.name  }}</td>
                   <td>{{order.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
-                  <td><button pButton type="button" label="Print" (click)="viewReceipt(order)" icon="pi pi-eye" class="p-button-text p-button-success p-button-sm text-xs"></button></td>
+                  <td><button pButton type="button" label="Print" (click)="viewReceipt(order)" icon="pi pi-print" class="p-button-text p-button-success p-button-sm text-xs"></button></td>
                   <td><button pButton type="button" label="Update" (click)="updateSalesOrder(order)" icon="pi pi-pencil" class="p-button-text p-button-primary p-button-sm text-xs"></button></td>
               </tr>
           </ng-template>

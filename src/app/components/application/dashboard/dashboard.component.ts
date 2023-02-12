@@ -159,11 +159,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 font: {
                   size: '16',
                 },
-                color: '#fff'
+                color:  '#86A3B8'
               },
               legend: {
                   labels: {
-                      color: '#fff'
+                      color: '#86A3B8'
                   }
               },
           },
@@ -171,12 +171,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
             x: {
                 grid: {
                   offset: true,
-                  display: false
+                  display: true
                 }
             },
             y: {
               grid: {
-                display: false
+                display: true
               }
             }
           }
