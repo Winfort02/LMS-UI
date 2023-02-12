@@ -7,15 +7,15 @@
             <h3 class="text-primary text-xl uppercase">Dashboard</h3>
           </div>
           <div class="col-12 sm:col-12 md:col-7 lg:col-5 xl:col-5 flex flex-row justify-content-center aling-items-center gap-3">
-            <div class="col-4 surface-hover border-round border-x-2 border-orange-700 h-4rem">
+            <div class="col-4 surface-hover h-4rem" [ngClass]="{'border-round border-x-2 border-orange-700': themeService.currentUser }">
               <label class="text-sm font-bold">CHARGE SALES</label>
               <p class="text-orange-700 font-bold px-2 py-1"> {{ counts.charge_sales | currency: 'P ' }} </p>
             </div>
-            <div class="col-4 surface-hover border-round border-x-2 border-cyan-700 h-4rem">
+            <div class="col-4 surface-hover h-4rem" [ngClass]="{'border-round border-x-2 border-cyan-700': themeService.currentUser }">
               <label class="text-sm font-bold">DELIVERY SALES</label>
               <p class="text-cyan-700 font-bold px-2 py-1"> {{ counts.delivery_sales | currency: 'P '}} </p>
             </div>
-            <div class="col-4 surface-hover border-round border-x-2 border-teal-700 h-4rem">
+            <div class="col-4 surface-hover h-4rem" [ngClass]="{'border-round border-x-2 border-teal-700 ' : themeService.currentUser }">
               <label class="text-sm font-bold">CASH SALES </label>
               <p class="text-teal-700 font-bold px-2 py-1"> {{ counts.cash_sales | currency: 'P '}} </p>
             </div>
@@ -25,25 +25,25 @@
 
       <div class="col-12 flex flex-column sm:flex-column md:flex-column lg:flex-row xl:flex-row justify-content-around aling-items-center gap-2 px-2 w-full">
         <div class="col-12 sm:col-12 md:col-12 lg:col-8 xl:col-8 flex justify-content-around aling-items-center flex-row flex-wrap gap-2">
-          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-y-3 border-primary-500 ">
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover h-7rem" [ngClass]="{'border-round border-y-3 border-primary-500': themeService.currentUser }">
             <h5 class="text-center text-sm uppercase"> Total Products </h5>
             <p class="text-center text-2xl text-primary"> {{ counts.products }}</p>
           </div>
-          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-y-3 border-orange-500">
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover h-7rem" [ngClass]="{'border-round border-y-3 border-orange-500' : themeService.currentUser }">
             <h5 class="text-center text-sm uppercase te"> Total Categories</h5>
             <p class="text-center text-2xl text-orange-500"> {{ counts.categories }} </p>
           </div>
-          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-y-3 border-teal-500">
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover h-7rem" [ngClass]="{'border-round border-y-3 border-teal-500': themeService.currentUser }">
             <h5 class="text-center text-sm uppercase "> Total Customers </h5>
             <p class="text-center text-2xl text-teal-500"> {{ counts.customers }} </p>
           </div>
-          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-y-3 border-red-500">
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover h-7rem" [ngClass]="{'border-round border-y-3 border-red-500' : themeService.currentUser }">
             <h5 class="text-center text-sm uppercase"> Total Supplier </h5>
             <p class="text-center text-2xl text-red-500"> {{ counts.suppliers }} </p>
           </div>
         </div>
         <div class="col-12 sm:col-12 md:col-12 lg:col-3 xl:col-3">
-          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover border-round h-7rem border-3 border-bluegray-500 flex-column">
+          <div class="col-12 sm:col-12 md:col lg:col xl:col surface-hover h-7rem" [ngClass]="{'border-round border-3 border-bluegray-500 flex-column': themeService.currentUser }">
             <h5 class="text-center text-sm uppercase"> CURRENT SALES </h5>
             <p class="text-center text-2xl text-bluegray-500">{{ counts.current_sales | currency: 'P ' }} </p>
           </div>
@@ -113,7 +113,7 @@
                       <td>{{order.sales_date }}</td>
                       <td class="text-right">{{order.payment | currency: 'P ' }}</td>
                       <td class="text-right">{{order.total_amount | currency: 'P ' }}</td>
-                      <td class="text-right">{{(order.total_amount - order.payment) | currency: 'P '}}</td>
+                      <td class="text-right">{{(order.total_amount - order.payment) > 0 ?  (order.total_amount - order.payment | currency: 'P ') : 0  | currency: 'P '}}</td>
                       <td>{{order.sales_type }}</td>
                       <td>{{order.payment_type }}</td>
                       <td>{{order.order_status }}</td>

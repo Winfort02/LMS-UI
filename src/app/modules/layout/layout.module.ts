@@ -11,6 +11,7 @@ import { LayoutComponent } from './layout.component';
 import { LayoutRouterActivate } from './layout-router.activate';
 
 
+
 // PRIMENG MODULES
 import { MenubarModule } from 'primeng/menubar';
 import { SidebarModule } from 'primeng/sidebar';
@@ -31,7 +32,7 @@ import { ToastModule } from 'primeng/toast';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 
 @NgModule({
@@ -60,7 +61,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ToastModule,
     PanelMenuModule,
     BreadcrumbModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputSwitchModule
+    
   ],
   exports: [
     SidebarComponent,

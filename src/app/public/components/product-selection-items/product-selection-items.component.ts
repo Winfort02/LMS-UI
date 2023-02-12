@@ -89,8 +89,10 @@ export class ProductSelectionItemsComponent implements OnInit {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -124,8 +126,10 @@ export class ProductSelectionItemsComponent implements OnInit {
       this.messageService.add({
         severity: 'custom',
         detail: `Please select a product`,
-        life: 1500,
-        styleClass: 'text-700 bg-red-700 border-y-3 border-white text-white',
+        life: 2000,
+        closable: false,
+        icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+        styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
         contentStyleClass: 'p-2 text-sm'
       });
       return
@@ -138,8 +142,10 @@ export class ProductSelectionItemsComponent implements OnInit {
             this.messageService.add({
               severity: 'custom',
               detail: `Product ${this.product_item.product_name} has ${current_product.available_qty} quantity on hand`,
-              life: 1500,
-              styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             return
@@ -157,8 +163,10 @@ export class ProductSelectionItemsComponent implements OnInit {
           this.messageService.add({
             severity: 'custom',
             detail: `Product ${this.product_item.product_name} add to list successfully`,
-            life: 1500,
-            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            life: 2000,
+            closable: false,
+            icon: 'pi pi-check-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
           this.discount = 0;
@@ -168,7 +176,9 @@ export class ProductSelectionItemsComponent implements OnInit {
           this.messageService.add({
             severity: 'custom',
             detail: `Product ${this.product_item.product_name} has already addded to the list`,
-            life: 1500,
+            life: 2000,
+            closable: false,
+            icon: 'pi pi-check-circle text-lg mt-2 text-white',
             styleClass: 'text-700 bg-red-600 border-y-3 border-white',
             contentStyleClass: 'p-2 text-sm'
           });
@@ -190,8 +200,10 @@ export class ProductSelectionItemsComponent implements OnInit {
         this.messageService.add({
           severity: 'custom',
           detail: `Product ${this.product_item.product_name} add to list successfully`,
-          life: 1500,
-          styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi pi-check-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
         this.discount = 0;
@@ -203,8 +215,10 @@ export class ProductSelectionItemsComponent implements OnInit {
         this.messageService.add({
           severity: 'custom',
           detail: `Product ${this.product_item.product_name} has ${this.product_item.product_on_hand} quantity on hand`,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
         return
@@ -222,8 +236,10 @@ export class ProductSelectionItemsComponent implements OnInit {
       this.messageService.add({
         severity: 'custom',
         detail: `Product ${this.product_item.product_name} add to list successfully`,
-        life: 1500,
-        styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+        life: 2000,
+        closable: false,
+        icon: 'pi pi-check-circle text-lg mt-2 text-white',
+        styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
         contentStyleClass: 'p-2 text-sm'
       });
       this.discount = 0;

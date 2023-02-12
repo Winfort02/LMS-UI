@@ -32,7 +32,16 @@
             ],
             "styles": [
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/bootstrap4-dark-blue/theme.css",
+              {
+                "input": "node_modules/primeng/resources/themes/bootstrap4-dark-blue/theme.css",
+                "bundleName": "dark",
+                "inject": false
+              },
+              {
+                "input": "node_modules/primeng/resources/themes/fluent-light/theme.css",
+                "bundleName": "light",
+                "inject": false
+              },
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeflex/primeflex.css",
               "src/styles.scss"

@@ -149,3 +149,566 @@
     height: 150px;
     margin-left:-20px;
 }
+
+
+/* SIDE NAV ICONS */
+
+.lms-sales-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-sales-icon::after {
+  content: '';
+  background:url('../images/sales-icon-18193.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+.lms-sales-order-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-sales-order-icon::after {
+  content: '';
+  background:url('../images/list-icon-1423.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-transaction-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-transaction-icon::after {
+  content: '';
+  background:url('../images/money-transfer-icon-40386.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-pos-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-pos-icon::after {
+  content: '';
+  background:url('../images/point-of-sale-icon-10672.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-master-file-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-master-file-icon::after {
+  content: '';
+  background:url('../images/txt-file-icon-1214.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-users-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-users-icon::after {
+  content: '';
+  background:url('../images/business-icon-png-1935.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+.lms-customers-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-customers-icon::after {
+  content: '';
+  background:url('../images/customers-icon-35912.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-brands-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-brands-icon::after {
+  content: '';
+  background:url('../images/item-icon-2192.jpg') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-category-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-category-icon::after {
+  content: '';
+  background:url('../images/blank-tag-png-9228.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-customer-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-customer-icon::after {
+  content: '';
+  background:url('../images/customers-icon-35912.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-supplier-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-supplier-icon::after {
+  content: '';
+  background:url('../images/seller-icon-7669.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+.lms-product-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-product-icon::after {
+  content: '';
+  background:url('../images/seo-icon-png-2267.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-stock-in-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-stock-in-icon::after {
+  content: '';
+  background:url('../images/warehouse-inventory-icon-33851.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-stock-out-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-stock-out-icon::after {
+  content: '';
+  background:url('../images/warehouse-inventory-icon-33865.jpg') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+.lms-product-report-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-product-report-icon::after {
+  content: '';
+  background:url('../images/report-icon-13342.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+.lms-sales-report-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-sales-report-icon::after {
+  content: '';
+  background:url('../images/report-icon-13326.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-settings-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-settings-icon::after {
+  content: '';
+  background:url('../images/settings-icon-14950.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-change-password-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-change-password-icon::after {
+  content: '';
+  background:url('../images/login-icon-3060.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+.lms-end-session-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-end-session-icon::after {
+  content: '';
+  background:url('../images/shutdown-icon-11837.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-dashboard-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-dashboard-icon::after {
+  content: '';
+  background:url('../images/dashboard-icon-23685.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}
+
+
+.lms-dashboard-report-icon {
+  // width:100px;
+  position: relative;
+  display:block;
+  width: 20px;
+  height: 15px;
+  max-width: 100%;
+  // background:black;
+  color:white;
+  text-decoration:none;
+  padding-left:20px;
+}
+
+.lms-dashboard-report-icon::after {
+  content: '';
+  background:url('../images/dashboard-icon-23677.png') no-repeat 0px 0px;
+  background-position: center;
+  // background-size: cover;
+  background-size: contain;
+  position:absolute;
+  max-width: 100%;
+  width: 20px;
+  height: 15px;
+  margin-left:-20px;
+}

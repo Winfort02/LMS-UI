@@ -114,7 +114,9 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
+          life: 2000,
+closable: false,
+ icon: 'pi pi-check-circle text-lg mt-2 text-white',
           styleClass: 'text-700 bg-red-600 border-y-3 border-white',
           contentStyleClass: 'p-2 text-sm'
         })
@@ -134,7 +136,9 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
           this.messageService.add({
             severity: 'custom',
             detail: '' + error.error.message,
-            life: 1500,
+            life: 2000,
+closable: false,
+ icon: 'pi pi-check-circle text-lg mt-2 text-white',
             styleClass: 'text-700 bg-red-600 border-y-3 border-white',
             contentStyleClass: 'p-2 text-sm'
           })
@@ -196,7 +200,9 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
       this.messageService.add({
         severity: 'custom',
         detail: `Product ${item.product_name} has ${item.available_qty} quantity available only`,
-        life: 1500,
+        life: 2000,
+closable: false,
+ icon: 'pi pi-check-circle text-lg mt-2 text-white',
         styleClass: 'text-700 bg-red-600 border-y-3 border-white',
         contentStyleClass: 'p-2 text-sm'
       });
@@ -229,8 +235,6 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
           }));
           this.order.user_id = this.current_user.id as number;
           this.order.total_amount = this.orderItemCartService.getTotal(order_items.items);
-
-          console.log(this.order)
           if(this.order.items.length) {
             this.dialogRef = this.dialogService.open(PlaceOrderDetailComponent, {
               header: 'CHECK OUT',
@@ -258,8 +262,10 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
             this.messageService.add({
               severity: 'custom',
               detail: 'Please add a product to process the order',
-              life: 1500,
-              styleClass: 'text-700 bg-red-600 border-y-3 border-white text-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             return
@@ -302,9 +308,11 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
           this.loadCustomerDetail(this.customer.id as number);
           this.messageService.add({
             severity: 'custom',
-            detail: 'New Category Added Successfully',
-            life: 1500,
-            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            detail: 'New Customer Added Successfully',
+            life: 2000,
+            closable: false,
+            icon: 'pi pi-check-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
         }
@@ -312,8 +320,10 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + response.data,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
       }

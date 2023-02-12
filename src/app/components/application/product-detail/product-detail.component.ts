@@ -110,8 +110,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -133,8 +135,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -157,8 +161,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -197,8 +203,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           this.messageService.add({
             severity: 'custom',
             detail: '' + error.error.message,
-            life: 1500,
-            styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+            life: 2000,
+            closable: false,
+            icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
           this.isComponentShown = true;
@@ -223,8 +231,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
             const product = response.data;
             this.messageService.add({
               severity: 'custom',
-              detail: 'New Product Added Successfully',
-              styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+              detail: 'Product Added Successfully',
+              life: 2000,
+              closable: false,
+              icon: 'pi pi-check-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             this.location.go(
@@ -236,8 +247,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
             this.messageService.add({
               severity: 'custom',
               detail: '' + error.error.message,
-              life: 1500,
-              styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             })
           }
@@ -254,8 +267,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
             this.messageService.add({
               severity: 'custom',
               detail: 'Product Updated Successfully',
-              life: 1500,
-              styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi pi-check-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             this.loadProductDetail();
@@ -264,8 +279,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
             this.messageService.add({
               severity: 'custom',
               detail: '' + error.error.message,
-              life: 1500,
-              styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             })
           }

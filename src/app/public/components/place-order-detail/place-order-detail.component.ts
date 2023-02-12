@@ -39,6 +39,7 @@ export class PlaceOrderDetailComponent implements OnInit {
       this.order.sales_date = new Date();
       this.order.payment = 0;
       this.total_payment = this.order.total_amount;
+      this.order.remarks = this.order.remarks == null ? '-' : this.order.remarks;
     }
   }
 
@@ -52,22 +53,27 @@ export class PlaceOrderDetailComponent implements OnInit {
       this.messageService.add({
         severity: 'custom',
         detail: 'Required Payment Type and Customer Cash Rendered',
-        life: 1500,
-        styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+        life: 2000,
+        closable: false,
+        icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+        styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
         contentStyleClass: 'p-2 text-sm'
       });
       return
     }
 
     this.order.sales_date = this.datePipe.transform(this.order.sales_date, 'Y-MM-dd');
+    this.order.status = this.order.status ? true : false;
     this.orderService.createSalesOrder(this.order).subscribe({
       next: async (response: any) => {
         const order = await response.data;
         this.messageService.add({
           severity: 'custom',
           detail: 'Place order successfully',
-          life: 1500,
-          styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi pi-check-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
         this.orderItemCartService.onClearCart();
@@ -76,8 +82,10 @@ export class PlaceOrderDetailComponent implements OnInit {
         this.messageService.add({
           severity: 'custom',
           detail: error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }

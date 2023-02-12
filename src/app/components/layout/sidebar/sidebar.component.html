@@ -3,7 +3,7 @@
   <div class="layout-menu">
     <a routerLink="#" class="logo flex flex-column justify-content-center aling-items-center gap-3">
       <img alt="logo" src="https://www.lansweeper.com/wp-content/uploads/2018/05/ASSET-USER-ADMIN.png"/>
-      <label class="profile-name text-sm uppercase text-center"> {{ current_user.name }} </label>
+      <span class="text-sm uppercase text-center text-primary"> {{ current_user.name }} </span>
       <span class="bg-teal-500 w-full h-1rem"></span>
     </a>
     <p-panelMenu [transitionOptions]="'0ms'" [multiple]='false' [model]="sideItems" [style]="{ 'width': '95%', 'margin': 'auto', 'border-radius': 'none'}"></p-panelMenu>

@@ -3,9 +3,18 @@
     <i class="pi pi-bars"></i>
   </a>
   <a routerLink="#" class="text-base text-white font-bold p-2 company uppercase">
-     <span class="text-red-400">LMS - Inventory System</span>
+     <span class="text-primary">LMS - Inventory System</span>
   </a>
   <ul class="topbar-menu">
-    <li class="topbar-submenu-header text-md"><span class="text-sm"> {{ dateToday | date: 'EEEE - MMMM d, y h:mm:ss a'  }} </span> </li>
+    <li class="topbar-submenu-header text-md">
+      <div class="flex justify-content-end align-items-center gap-5">
+        <div class="flex justify-content-center align-items-center">
+          <span class="text-sm"> {{ dateToday | date: 'EEEE - MMMM d, y h:mm:ss a'  }} </span>
+        </div>
+        <div class="flex justify-content-center align-items-center">
+          <button pButton class="p-button-primary p-button-text text-2xl font-bold" [icon]="isDark == true ? 'pi pi-moon' : 'pi pi-sun'" (click)="switchTheme($event)" [ngClass]="{'text-bluegray-900': !isDark}"></button>
+        </div>
+      </div>
+    </li>
   </ul>
 </div>

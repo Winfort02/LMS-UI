@@ -9,6 +9,7 @@ import { OrderService } from 'src/app/services/application/order/order.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SalesOrderPdfComponent } from 'src/app/public/components/sales-order-pdf/sales-order-pdf.component';
 import { ProductModel } from 'src/app/models/product.model';
+import { ThemeServiceService } from 'src/app/services/application/theme/theme-service.service';
 
 
 interface counts {
@@ -36,9 +37,7 @@ interface YearlySales {
 export class DashboardComponent implements OnInit, OnDestroy {
 
   selected_year: any = new Date();
-
   current_date: any = new Date();
-
   product_subscription!: Subscription;
   latest_trans_subscription!: Subscription;
   products_subscription!: Subscription;
@@ -79,25 +78,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private orderService: OrderService,
     private dialogRef: DynamicDialogRef,
-    private dialogService: DialogService
-  ) { 
-     
-  }
+    private dialogService: DialogService,
+    public themeService: ThemeServiceService
+  ) { }
 
   countAll() {
     this.dashboardService.countAll().subscribe({
       next: async (response: any) => {
         const counts = await response.data;
         this.counts = counts;
-        console.log(this.counts)
         this.generateYearlySales();
       },
       error: (error) => {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -171,8 +170,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
           scales: {
             x: {
                 grid: {
-                  offset: true
+                  offset: true,
+                  display: false
                 }
+            },
+            y: {
+              grid: {
+                display: false
+              }
             }
           }
         }
@@ -181,8 +186,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -215,8 +222,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -283,8 +292,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -311,8 +322,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
       }
@@ -330,8 +343,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
       }

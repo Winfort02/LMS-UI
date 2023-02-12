@@ -115,8 +115,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
           this.messageService.add({
             severity: 'custom',
             detail: '' + error.error.message,
-            life: 1500,
-            styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+            life: 2000,
+            closable: false,
+            icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
           this.isComponentShown = true;
@@ -138,8 +140,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
             this.messageService.add({
               severity: 'custom',
               detail: 'New user added successfully',
-              life: 1500,
-              styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi pi-check-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             this.location.go(
@@ -150,8 +154,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
             this.messageService.add({
               severity: 'custom',
               detail: '' + error.error.message,
-              life: 1500,
-              styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             return
@@ -164,8 +170,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
             this.messageService.add({
               severity: 'custom',
               detail: 'User updated successfully',
-              life: 1500,
-              styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi pi-check-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             this.loadUserDetail();
@@ -174,8 +182,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
             this.messageService.add({
               severity: 'custom',
               detail: '' + error.error.message,
-              life: 1500,
-              styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             return
@@ -221,8 +231,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
         this.loading = false;
@@ -274,8 +286,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
           this.messageService.add({
             severity: 'custom',
             detail: 'Order updated Successfully',
-            life: 1500,
-            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            life: 2000,
+            closable: false,
+            icon: 'pi pi-check-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
           this.getAllSalesOrder(this.current_page);
@@ -284,8 +298,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         this.messageService.add({
           severity: 'custom',
           detail: '' + response.data,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
         this.getAllSalesOrder(this.current_page);
@@ -323,16 +339,20 @@ export class UserDetailComponent implements OnInit, OnDestroy {
           this.messageService.add({
             severity: 'custom',
             detail: 'Password change successfully',
-            life: 1500,
-            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            life: 2000,
+            closable: false,
+            icon: 'pi pi-check-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
         } else {
           this.messageService.add({
             severity: 'custom',
             detail: '' + response.data.error.message,
-            life: 1500,
-            styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+            life: 2000,
+            closable: false,
+            icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
         }

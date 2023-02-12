@@ -27,7 +27,9 @@ export class ApplicationGuard implements CanActivate {
         this.messageService.add({
           severity: 'custom',
           detail: 'Unauthorized ',
-          life: 1500,
+          life: 2000,
+closable: false,
+ icon: 'pi pi-check-circle text-lg mt-2 text-white',
           styleClass: 'text-700 bg-red-600 border-y-3 border-white',
           contentStyleClass: 'p-2 text-sm'
         });

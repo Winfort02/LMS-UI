@@ -5,6 +5,25 @@ body {
   box-sizing: border-box !important;
 }
 
+button:focus {
+  box-shadow: none !important;
+  outline: none !important ;
+}
+
+button:active {
+  box-shadow: none !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* selected */
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: #5c5a5a;
+  color: #f2f2f2;
+}
 
 .container {
   padding: 10px;
@@ -48,6 +67,11 @@ body {
     }
   }
 }
+
+
+
+
+
 
 
 

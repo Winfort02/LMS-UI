@@ -77,8 +77,10 @@ export class CustomerComponent implements OnInit {
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
         this.loading = false;
@@ -109,9 +111,11 @@ export class CustomerComponent implements OnInit {
         if(response.code === 201) {
           this.messageService.add({
             severity: 'custom',
-            detail: 'New Category Added Successfully',
-            life: 1500,
-            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            detail: 'New Customer Added Successfully',
+            life: 2000,
+            closable: false,
+            icon: 'pi pi-check-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
           this.getAllCustomers(this.current_page);
@@ -120,8 +124,10 @@ export class CustomerComponent implements OnInit {
         this.messageService.add({
           severity: 'custom',
           detail: '' + response.data,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
         this.getAllCustomers(this.current_page);
@@ -149,9 +155,11 @@ export class CustomerComponent implements OnInit {
         if(response.code === 200) {
           this.messageService.add({
             severity: 'custom',
-            detail: 'New Updated uccessfully',
-            life: 1500,
-            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            detail: 'Customer Updated uccessfully',
+            life: 2000,
+            closable: false,
+            icon: 'pi pi-check-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
           this.getAllCustomers(this.current_page);
@@ -160,8 +168,10 @@ export class CustomerComponent implements OnInit {
         this.messageService.add({
           severity: 'custom',
           detail: '' + response.data,
-          life: 1500,
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         });
         this.getAllCustomers(this.current_page);
@@ -185,9 +195,11 @@ export class CustomerComponent implements OnInit {
           next: async (response: any) => {
             this.messageService.add({
               severity: 'custom',
-              detail: 'Category Deleted successfully',
-              life: 1500,
-              styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+              detail: 'Customer Deleted successfully',
+              life: 2000,
+              closable: false,
+              icon: 'pi pi-check-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
 
@@ -202,8 +214,10 @@ export class CustomerComponent implements OnInit {
             this.messageService.add({
               severity: 'custom',
               detail: '' + error.message,
-              life: 1500,
-              styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+              life: 2000,
+              closable: false,
+              icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+              styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
             return;

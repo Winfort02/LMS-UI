@@ -1,6 +1,6 @@
 
 
-<div class="container max-w-full fadein animation-duration-2000">
+<div class="container max-w-full">
   <div class="grid">
     <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
 
@@ -75,7 +75,7 @@
                   <td>{{order.customer?.customer_name }}</td>
                   <td class="text-right">{{order.payment | currency: 'P ' }}</td>
                   <td class="text-right">{{order.total_amount | currency: 'P ' }}</td>
-                  <td class="text-right">{{(order.total_amount - order.payment) > 0 ?  (order.total_amount - order.payment) : 0  | currency: 'P '}}</td>
+                  <td class="text-right">{{(order.total_amount - order.payment) > 0 ?  (order.total_amount - order.payment | currency: 'P ') : 0  | currency: 'P '}}</td>
                   <td>{{order.sales_type }}</td>
                   <td>{{order.payment_type }}</td>
                   <td>{{order.order_status }}</td>

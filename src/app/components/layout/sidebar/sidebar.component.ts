@@ -154,8 +154,10 @@ export class SidebarComponent implements OnInit {
                 this.messageService.add({
                   severity: 'custom',
                   detail: '' + error.error.message,
-                  life: 1500,
-                  styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+                  life: 2000,
+                  closable: false,
+                  icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+                  styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
                   contentStyleClass: 'p-2 text-sm'
                 });
               }
@@ -176,111 +178,111 @@ export class SidebarComponent implements OnInit {
       this.sideItems = [
         {
           label: 'Dashboard',
-          icon:'pi pi-th-large',
+          icon:'lms-dashboard-icon',
           items: [
               {
                   label: 'Report',
-                  icon:'pi pi-chart-pie',
+                  icon:'lms-dashboard-report-icon',
                   routerLink: '/application/dashboard'
               },
           ]
         },
         {
           label: 'Master File',
-          icon:'pi pi-desktop',
+          icon:'lms-master-file-icon',
           items: [
               {
                   label: 'Users',
-                  icon:'pi pi-users',
+                  icon:'lms-users-icon',
                   routerLink: '/application/users',
               },
               {
                 label: 'Categories',
-                icon:'pi pi-tags',
+                icon:'lms-category-icon',
                 routerLink: '/application/categories',
               },
               {
                 label: 'Brands',
-                icon:'pi pi-tag',
+                icon:'lms-brands-icon',
                 routerLink: '/application/brands',
               },
               {
                 label: 'Customers',
-                icon:'pi pi-id-card',
+                icon:'lms-customer-icon',
                 routerLink: '/application/customers',
               },
               {
                 label: 'Suppliers',
-                icon:'pi pi-sitemap',
+                icon:'lms-supplier-icon',
                 routerLink: '/application/suppliers',
               },
           ]
         },
         {
           label: 'Product Management',
-          icon:'pi pi-briefcase',
+          icon:'lms-product-icon',
           items: [
               {
                   label: 'Products',
-                  icon:'pi pi-box',
+                  icon:'lms-sales-order-icon',
                   routerLink: '/application/products',
               },
               {
                 label: 'Stock In',
-                icon:'pi pi-arrow-right',
+                icon:'lms-stock-in-icon',
                 routerLink: '/application/product/stock-in',
               },
               {
                 label: 'Stock Return',
-                icon:'pi pi-arrow-left',
+                icon:'lms-stock-out-icon',
                 routerLink: '/application/product/stock-return',
               },
               {
                 label: 'Inventory',
-                icon:'pi pi-file-pdf',
+                icon:'lms-product-report-icon',
                 routerLink: `/application/product/inventory`,
               }
           ]
         },
         {
           label: 'Sales',
-          icon:'pi pi-folder-open',
+          icon:'lms-sales-icon',
           items: [
               {
-                label: 'Sales',
-                icon:'pi pi-chart-line',
+                label: 'Sales Order',
+                icon:'lms-sales-order-icon',
                 routerLink: '/application/orders',
               },
               {
                   label: 'Reports',
-                  icon:'pi pi-print',
+                  icon:'lms-sales-report-icon',
                   routerLink: '/application/order/sales-report',
               },
           ]
         },
         {
           label: 'Transaction',
-          icon:'pi pi-dollar',
+          icon:'lms-transaction-icon',
           items: [
               {
                   label: 'POS',
-                  icon:'pi pi-window-maximize',
+                  icon:'lms-pos-icon',
                   routerLink: '/application/order-detail/' + 0,
               },
           ]
         },
         {
           label: 'Settings',
-          icon: 'pi pi-cog',
+          icon: 'lms-settings-icon',
           items: [
             {
               label: 'Change Password',
-              icon: 'pi pi-shield',
+              icon: 'lms-change-password-icon',
               command: (event) => {this.changePassword()}
             },
             {
                 label: 'End Session',
-                icon: 'pi pi-power-off',
+                icon: 'lms-end-session-icon',
                 command: (event) => {this.logout()}
             }
           ]
@@ -290,22 +292,22 @@ export class SidebarComponent implements OnInit {
       this.sideItems = [
         {
           label: 'Dashboard',
-          icon:'pi pi-slack',
+          icon:'lms-dashboard-icon',
           items: [
               {
                   label: 'Dashboard',
-                  icon:'pi pi-chart-pie',
+                  icon:'lms-dashboard-report-icon',
                   routerLink: '/application/cashier'
               },
           ]
         },
         {
           label: 'Sales',
-          icon:'pi pi-dollar',
+          icon:'lms-sales-icon',
           items: [
               {
                   label: 'Reports',
-                  icon:'pi pi-print',
+                  icon:'lms-sales-report-icon',
                   routerLink: '/application/order/sales-report',
                   command: () => { this.redirectTo('/application/order/sales-report')}
               },
@@ -313,11 +315,11 @@ export class SidebarComponent implements OnInit {
         },
         {
           label: 'Transaction',
-          icon:'pi pi-database',
+          icon:'lms-transaction-icon',
           items: [
               {
                   label: 'POS',
-                  icon:'pi pi-window-maximize',
+                  icon:'lms-pos-icon',
                   routerLink: '/application/order-detail/' + 0,
                   command: () => { this.redirectTo('/application/order-detail/0')}
               },
@@ -325,16 +327,16 @@ export class SidebarComponent implements OnInit {
         },
         {
           label: 'Settings',
-          icon: 'pi pi-cog',
+          icon: 'lms-settings-icon',
           items: [
             {
               label: 'Change Password',
-              icon: 'pi pi-shield',
+              icon: 'lms-change-password-icon',
               command: (event) => {this.changePassword()}
             },
             {
                 label: 'End Session',
-                icon: 'pi pi-power-off',
+                icon: 'lms-end-session-icon',
                 command: (event) => {this.logout()}
             }
           ]
@@ -365,8 +367,10 @@ export class SidebarComponent implements OnInit {
           this.messageService.add({
             severity: 'custom',
             detail: 'Password change successfully',
-            life: 1500,
-            styleClass: 'text-700 bg-teal-700 border-y-3 border-white',
+            life: 2000,
+            closable: false,
+            icon: 'pi pi-check-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
 
@@ -380,8 +384,10 @@ export class SidebarComponent implements OnInit {
                   this.messageService.add({
                     severity: 'custom',
                     detail: '' + error.error.message,
-                    life: 1500,
-                    styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+                    life: 2000,
+                    closable: false,
+                    icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+                    styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
                     contentStyleClass: 'p-2 text-sm'
                   });
                 }
@@ -392,8 +398,10 @@ export class SidebarComponent implements OnInit {
           this.messageService.add({
             severity: 'custom',
             detail: '' + response.data.error.message,
-            life: 1500,
-            styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+            life: 2000,
+            closable: false,
+            icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           });
         }
