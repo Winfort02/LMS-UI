@@ -45,8 +45,20 @@ export class OrderService {
     return this.http.get<Array<OrderModel>>(`${DEFAULT_URL}/api/orders/by-customer/${id}?${page}&keywords=${keywords}`, httpOptions).pipe(shareReplay(1), catchError(this.httpError));
   }
 
+
+  showAllUnPaidOrder() : Observable<Array<OrderModel>> {
+    return this.http.get<Array<OrderModel>>(`${DEFAULT_URL}/api/orders/by-customer/status`, httpOptions).pipe(shareReplay(1), catchError(this.httpError));
+  }
+
   createSalesOrder(data: OrderModel) { 
     return this.http.post<OrderModel>(`${DEFAULT_URL}/api/orders`, data, httpOptions).pipe(
+      shareReplay(1),
+      catchError(this.httpError)
+    );
+  }
+
+  getOrderById(id: number) : Observable<Array<OrderModel>> {
+    return this.http.get<Array<OrderModel>>(`${DEFAULT_URL}/api/orders/${id}`, httpOptions).pipe(
       shareReplay(1),
       catchError(this.httpError)
     );

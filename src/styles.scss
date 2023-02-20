@@ -23,6 +23,7 @@ button:active {
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   background: #3e6fe9;
   color: #f2f2f2;
+  z-index: 0;
 }
 
 .container {
@@ -32,15 +33,19 @@ button:active {
 
 
 .dashboard {
-  .p-dropdown-items {
+  .p-dropdown {
     width: 100% !important;
-    max-width: 270px !important;
-    overflow-x: scroll !important;
-  
-    .p-dropdown-item {
-      width: 450px !important;
+    max-width: 300px !important;
+    .p-dropdown-items {
+      max-width: 290px !important;
+      overflow-x: scroll !important;
+      .p-dropdown-item {
+        width: 500px !important;
+      }
     }
+
   }
+  
 }
 
 .product_report {
@@ -67,6 +72,9 @@ button:active {
     }
   }
 }
+
+
+
 
 
 

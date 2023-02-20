@@ -111,7 +111,6 @@
                       <th pResizableColumn>Customer</th>
                       <th pResizableColumn>Date</th>
                       <th pResizableColumn>Amount</th>
-                      <th pResizableColumn>Payment Type</th>
                       <th pResizableColumn>Order Status</th>
                       <th pResizableColumn>Payment Status</th>
                       <th pResizableColumn>Created By</th>
@@ -128,7 +127,6 @@
                       <td>{{order.customer?.customer_name }}</td>
                       <td>{{order.sales_date }}</td>
                       <td class="text-right">{{order.total_amount | currency: 'P ' }}</td>
-                      <td>{{order.payment_type }}</td>
                       <td>{{order.order_status }}</td>
                       <td [ngClass]="{'text-red-600' : !order.status}" class="text-teal-500">{{order.status == 1 ? 'Paid' : 'Pending' }}</td>
                       <td>{{order.user?.name  }}</td>

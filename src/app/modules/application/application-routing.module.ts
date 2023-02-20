@@ -21,6 +21,9 @@ import { AdminGuard } from 'src/app/guard/admin.guard';
 import { CashierDashboardComponent } from 'src/app/components/application/cashier-dashboard/cashier-dashboard.component';
 import { SalesReportComponent } from 'src/app/components/application/sales-report/sales-report.component';
 import { ProductReportComponent } from 'src/app/components/application/product-report/product-report.component';
+import { PaymentComponent } from 'src/app/components/application/payment/payment.component';
+import { PaymentDetailComponent } from 'src/app/components/application/payment-detail/payment-detail.component';
+import { CustomerPaymentSummaryReportComponent } from 'src/app/public/components/customer-payment-summary-report/customer-payment-summary-report.component';
 
 const routes: Routes = [
   {
@@ -46,6 +49,9 @@ const routes: Routes = [
       {path: 'orders', component: OrderComponent},
       {path: 'order-detail/:id', component: OrderDetailComponent},
       {path: 'order/sales-report', component: SalesReportComponent },
+      {path: 'payments', component: PaymentComponent},
+      {path: 'payments/detail/:id', component: PaymentDetailComponent},
+      {path: 'payments/reports', component: CustomerPaymentSummaryReportComponent},
     ]
   }
 ];

@@ -23,8 +23,8 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   
-  countAll() : Observable<any> {
-    return this.http.get<any>(`${DEFAULT_URL}/api/dashboard/count`, httpOptions).pipe(shareReplay(1), catchError(this.httpError));
+  countAll(start_date: any) : Observable<any> {
+    return this.http.get<any>(`${DEFAULT_URL}/api/dashboard/count?&start_date=${start_date}`, httpOptions).pipe(shareReplay(1), catchError(this.httpError));
   }
 
   generateearlySales(year: string) : Observable<any> {

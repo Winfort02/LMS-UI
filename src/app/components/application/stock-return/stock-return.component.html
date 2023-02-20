@@ -25,13 +25,14 @@
                   <th pResizableColumn style="width: 5%;">NO</th>
                   <th pResizableColumn>SUPPLIER</th>
                   <th pResizableColumn>PRODUCT</th>
+                  <th pResizableColumn>TRANSACTION #</th>
                   <th pResizableColumn>VAN / DR NUMBER.</th>
                   <th pResizableColumn>QUANTITY</th>
                   <th pResizableColumn>DATE</th>
                   <th pResizableColumn>REMARKS</th>
                   <th pResizableColumn>ENCODED BY</th>
-                  <th pResizableColumn style="text-align: center; width: 15%;">ENCODED DATE</th>
-                  <th pResizableColumn style="text-align: center; width: 5%;">DETAIL</th>
+                  <th pResizableColumn style="width: 15%;">ENCODED DATE</th>
+                  <th pResizableColumn style="width: 5%;">DETAIL</th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-stock let-i="rowIndex">
@@ -39,6 +40,7 @@
                   <td> {{ i + 1 }}</td>
                   <td>{{stock.supplier?.supplier_name | titlecase }}</td>
                   <td>{{stock.product?.product_name | titlecase }} {{ '' + stock.product?.description }}</td>
+                  <td>{{stock.transaction_number }}</td>
                   <td>{{stock.van_number }}</td>
                   <td>{{stock.quantity }}</td>
                   <td>{{stock.date }}</td>

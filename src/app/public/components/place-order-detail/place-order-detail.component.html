@@ -9,12 +9,6 @@
       </div>
       <div class="col-12">
         <span class="p-float-label">
-          <p-dropdown [options]="payment_types" [(ngModel)]="order.payment_type" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm"></p-dropdown>
-          <label for="float-input" class="text-xs">SELECT TYPE OF PAYMENT</label>
-        </span>
-      </div>
-      <div class="col-12">
-        <span class="p-float-label">
           <input type="number" class="outline-none w-full p-inputtext-sm" [disabled]="true" [(ngModel)]="total_payment" pInputText /> 
           <label for="float-input" class="text-xs">TOTAL PAYMENT</label>
         </span>
@@ -22,7 +16,7 @@
 
       <div class="col-12">
         <span class="p-float-label">
-          <input type="number" class="outline-none w-full p-inputtext-sm" [(ngModel)]="order.payment" (change)="calculate()" required pInputText /> 
+          <input type="number" class="outline-none w-full p-inputtext-sm" [(ngModel)]="payment" (change)="calculate()" required pInputText /> 
           <label for="float-input" class="text-xs">CASH</label>
         </span>
       </div>

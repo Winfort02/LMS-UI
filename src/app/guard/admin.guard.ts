@@ -30,20 +30,24 @@ export class AdminGuard implements CanActivate {
           severity: 'custom',
           detail: 'Unauthorized ',
           life: 2000,
-closable: false,
- icon: 'pi pi-check-circle text-lg mt-2 text-white',
+          closable: false,
+          icon: 'pi pi-check-circle text-lg mt-2 text-white',
           styleClass: 'text-700 bg-red-600 border-y-3 border-white',
           contentStyleClass: 'p-2 text-sm'
         });
         this.router.navigate(['/application']);
         return false;
       } else {
-        localStorage.clear();
+        localStorage.removeItem('access-token');
+        localStorage.removeItem('current_user');
+        // localStorage.clear();
         this.router.navigate(['/application/dashboard']);
         return false;
       }
     } else {
-      localStorage.clear();
+      localStorage.removeItem('access-token');
+      localStorage.removeItem('current_user');
+      // localStorage.clear();
       this.router.navigate(['/security/login']);
       return false;
     }

@@ -23,10 +23,13 @@ interface counts {
   charge_sales: number
 }
 
+
 interface YearlySales {
   label: Array<string>;
   cancel: Array<number>;
-  completed: Array<number>
+  completed: Array<number>;
+  paid: Array<number>;
+  balance: Array<number>;
 }
 
 @Component({
@@ -35,6 +38,11 @@ interface YearlySales {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  start_date: any = new Date();
+  end_date: any = new Date();
+
+  minDate: any = new Date();
+  maxDate: any = new Date();
 
   selected_year: any = new Date();
   current_date: any = new Date();
@@ -48,6 +56,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   products: Array<ProductModel> = [];
 
   product_list: Array<{label: string, value: number}> = [];
+
+  graphs: Array<any> = [
+    {label: 'Line', value: 'line'},
+    {label: 'Bar', value: 'bar'},
+  ];
+
+  isGenerate: boolean = true;
+
+  graph: string = '';
 
   counts: counts = {
     products: 0,
@@ -63,7 +80,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   yearly_sales: YearlySales = {
     label: [],
     cancel: [],
-    completed: []
+    completed: [],
+    paid: [],
+    balance: []
   }
 
   data: any;
@@ -83,11 +102,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   countAll() {
-    this.dashboardService.countAll().subscribe({
+    this.start_date = this.datePipe.transform(this.start_date, 'Y-MM-dd');
+    this.end_date = this.datePipe.transform(this.end_date, 'Y-MM-dd');
+    this.dashboardService.countAll(this.start_date).subscribe({
       next: async (response: any) => {
         const counts = await response.data;
         this.counts = counts;
         this.generateYearlySales();
+        this.loadProducts();
       },
       error: (error) => {
         this.messageService.add({
@@ -103,9 +125,40 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+  selectedGraph(e: any) {
+
+    this.generateYearlySales();
+  }
+
   selectedYear(e: any) {
     this.selected_year = this.datePipe.transform(this.current_date, 'yyyy');
     this.generateYearlySales()
+  }
+
+  selectedDate(e: any) {
+    this.start_date = new Date(this.start_date);
+    this.loadMaxMinDate();
+
+
+    this.start_date = this.datePipe.transform(this.start_date, 'Y-MM-dd');
+    this.end_date = this.datePipe.transform(this.end_date, 'Y-MM-dd');
+    this.dashboardService.countAll(this.start_date).subscribe({ 
+      next: async (response: any) => {
+        const counts = await response.data;
+        this.counts = counts;
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'custom',
+          detail: '' + error.error.message,
+          life: 2000,
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
+          contentStyleClass: 'p-2 text-sm'
+        })
+      }
+    });
   }
 
   selectedProduct() {
@@ -118,34 +171,46 @@ export class DashboardComponent implements OnInit, OnDestroy {
       next: async(response:any) => {
         const yearlSales = await response.data;
         this.yearly_sales = yearlSales;
-
         this.data = {
           labels: yearlSales.label,
             datasets: [
-              {
+            {
               label: 'CANCEL',
-              data: yearlSales.cancel,
+              data: yearlSales.balance,
               tension: 0.4,
               backgroundColor: [
-                '#B05A7A',
+                '#D61355',
               ],
               borderColor: [
-                '#B05A7A',
+                '#D61355',
               ],
               borderWidth: 1
             },
             {
-              label: 'COMPLETED',
+              label: 'PAYMENT',
+              data: yearlSales.paid,
+              tension: 0.4,
+              backgroundColor: [
+                '#6096B4',
+              ],
+              borderColor: [
+                '#6096B4',
+              ],
+              borderWidth: 1
+            },
+            {
+              label: 'SALES ORDER',
               data: yearlSales.completed,
               tension: 0.4,
               backgroundColor: [
-                '#1F8A70',
+                '#03C988',
               ],
               borderColor: [
-                '#1F8A70',
+                '#03C988',
               ],
               borderWidth: 1
-            }
+            },
+            
           ]
         };
 
@@ -171,12 +236,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
             x: {
                 grid: {
                   offset: true,
-                  display: true
+                  display: false
                 }
             },
             y: {
               grid: {
-                display: true
+                display: false
               }
             }
           }
@@ -194,7 +259,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         })
       }
     });
-    this.loadProducts()
   }
 
   loadProducts() {
@@ -302,10 +366,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
   }
 
+  loadMaxMinDate() {
+    let current_date = new Date();
+    let day = current_date.getDate();
+    let month = current_date.getMonth();
+    let year = current_date.getFullYear();
+    let min_day = this.start_date.getDate();
+    let min_month = this.start_date.getMonth();
+    let min_year = this.start_date.getFullYear();
+    this.minDate.setDate(min_day);
+    this.minDate.setMonth(min_month);
+    this.minDate.setFullYear(min_year);
+    this.maxDate.setDate(day);
+    this.maxDate.setMonth(month);
+    this.maxDate.setFullYear(year);
+  }
+
   
 
   ngOnInit(): void {
-   
+    this.loadMaxMinDate();
     this.countAll();
   }
 

@@ -5,7 +5,7 @@
     <div class="col-12 flex justify-content-center aling-items-center flex-column gap-3">
 
       <div class="col-12 flex justify-content-start align-items-center">
-        <h3 class="text-primary text-xl uppercase px-3"> SALES ORDERS </h3>
+        <h3 class="text-primary text-xl uppercase px-3"> PAYMENTS </h3>
       </div>
 
       <div class="col-12 flex justify-content-start aling-items-start flex-row flex-wrap row-gap-3">
@@ -33,55 +33,52 @@
         </div>
 
 
-        <div class="col-12 sm:col-12 md:col-6 lg:col-3 xl:col-3">
+        <div class="col-12 sm:col-12 md:col-6 lg:col-2 xl:col-2">
           <div class="p-inputgroup">
             <input type="text" class="p-inputtext-sm" [(ngModel)]="keywords" pInputText placeholder="Search...">   
             <button pButton type="button" class="p-button-sm p-button-raised" icon="pi pi-search" (click)="search()"></button>      
           </div>
         </div>
 
-        <div class="col-12 sm:col-12 md:col-12 lg:col-3 xl:col-3 flex justify-content-end align-items-center gap-2">
-          <button pButton type="button" label="Create Sales Order" (click)="createSalesOrder()" icon="pi pi-plus" class="p-button-raised p-button-primary p-button-sm"></button>
+        <div class="col-12 sm:col-12 md:col-12 lg:col-4 xl:col-4 flex justify-content-end align-items-center gap-2">
+          <button pButton type="button" label="Generate Report" (click)="generateReport()" icon="pi pi-print" class="p-button-raised p-button-success p-button-sm"></button>
+          <button pButton type="button" label="Add Payment" (click)="createPayment()" icon="pi pi-plus" class="p-button-raised p-button-primary p-button-sm"></button>
 
           <button pButton type="button" label="Close" (click)="close()" class="p-button-raised p-button-danger p-button-sm"></button>
         </div>
 
       </div>
       <div class="col-12">
-        <p-table [value]="sales_orders" (onLazyLoad)="showAllSalesOrder($event)" [loading]="loading" [lazy]="true"
+        <p-table [value]="payments" (onLazyLoad)="showAllPayments($event)" [loading]="loading" [lazy]="true"
         [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll">
           <ng-template pTemplate="header">
               <tr class="text-sm">
                   <th pResizableColumn>DATE</th>
-                  <th pResizableColumn>TRANSACTION #</th>
                   <th pResizableColumn>SO NUMBER</th>
                   <th pResizableColumn>CUSTOMER</th>
+                  <th pResizableColumn>DUE AMOUNT</th>
+                  <th pResizableColumn>PAYMENT TYPE</th>
                   <th pResizableColumn>AMOUNT</th>
-                  <th pResizableColumn># OF ITEMS</th>
-                  <th pResizableColumn>SALES TYPE</th>
-                  <th pResizableColumn style="width: 30px;">ORDER STATUS</th>
-                  <th pResizableColumn style="width: 30px;">STATUS</th>
+                  <th pResizableColumn>BALANCE</th>
                   <th pResizableColumn>ENCODED BY</th>
+                  <th pResizableColumn>STATUS</th>
                   <th pResizableColumn style="width: 15%;">ENCODED DATE</th>
-                  <th pResizableColumn style="text-align: center; width: 5%;">PRINT</th>
                   <th pResizableColumn style="text-align: center; width: 5%;">UPDATE</th>
               </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-order let-i="rowIndex">
-              <tr class="text-sm"  [ngClass]="{'bg-red-600 text-white' : order.order_status == 'Cancel'}">
-                  <td>{{order.sales_date }}</td>
-                  <td>{{order.transaction_number }}</td>
-                  <td>{{order.sales_order_number }}</td>
-                  <td>{{order.customer?.customer_name }}</td>
-                  <td class="text-right">{{order.total_amount | currency: 'P ' }}</td>
-                  <td class="text-center">{{ order.order_details.length ? order.order_details.length : 0 }}</td>
-                  <td>{{order.sales_type }}</td>
-                  <td>{{order.order_status }}</td>
-                  <td [ngClass]="{'text-red-500' : !order.status}" class="text-teal-500">{{order.status == 1 ? 'Paid' : 'Pending' }}</td>
-                  <td>{{order.user?.name  }}</td>
-                  <td>{{order.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
-                  <td><button pButton type="button" label="Print" (click)="viewReceipt(order)" icon="pi pi-print" class="p-button-text p-button-success p-button-sm text-xs"></button></td>
-                  <td><button pButton type="button" label="Update" (click)="updateSalesOrder(order)" icon="pi pi-pencil" class="p-button-text p-button-primary p-button-sm text-xs"></button></td>
+          <ng-template pTemplate="body" let-payment let-i="rowIndex">
+              <tr class="text-sm"  [ngClass]="{'bg-red-600 text-white' : !payment.status}">
+                  <td>{{payment.payment_date }}</td>
+                  <td>{{payment.order?.sales_order_number }}</td>
+                  <td>{{payment.customer?.customer_name }}</td>
+                  <td class="text-right">{{payment.due_amount | currency: 'P ' }}</td>
+                  <td>{{payment.payment_type }}</td>
+                  <td class="text-right">{{payment.amount | currency: 'P ' }}</td>
+                  <td class="text-right" [ngClass]="{'text-teal-500' : (payment.due_amount - payment.amount) > 0 }">{{(payment.due_amount - payment.amount) > 0 ?  (payment.due_amount - payment.amount | currency: 'P ') : 0  | currency: 'P '}}</td>
+                  <td>{{payment.user?.name }}</td>
+                  <td [ngClass]="{'text-teal-500' : payment.status}" class="text-teal-500">{{payment.status == 1 ? 'ACTIVE' : 'CANCEL' }}</td>
+                  <td>{{payment.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+                  <td><button pButton type="button" label="Update" (click)="updatePayment(payment)" icon="pi pi-pencil" class="p-button-text p-button-primary p-button-sm text-xs"></button></td>
               </tr>
           </ng-template>
         </p-table>

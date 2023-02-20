@@ -18,6 +18,8 @@ export class PlaceOrderDetailComponent implements OnInit {
   total_payment: number = 0;
   change: number = 0;
 
+  payment: number = 0;
+
   payment_types: Array<{label: string, value: string}> = [
     {label : 'Select', value: ''},
     {label : 'CASH', value: 'CASH'},
@@ -37,33 +39,21 @@ export class PlaceOrderDetailComponent implements OnInit {
     if(this.dialogConfig.data) {
       this.order = this.dialogConfig.data;
       this.order.sales_date = new Date();
-      this.order.payment = 0;
       this.total_payment = this.order.total_amount;
       this.order.remarks = this.order.remarks == null ? '-' : this.order.remarks;
     }
   }
 
   calculate() {
-    this.change = this.order.payment - this.total_payment ;
+    this.change = this.payment - this.total_payment;
   }
 
 
   checkOut() {
-    if(this.order.payment_type == '') {
-      this.messageService.add({
-        severity: 'custom',
-        detail: 'Required Payment Type and Customer Cash Rendered',
-        life: 2000,
-        closable: false,
-        icon: 'pi-exclamation-circle text-lg mt-2 text-white',
-        styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
-        contentStyleClass: 'p-2 text-sm'
-      });
-      return
-    }
 
     this.order.sales_date = this.datePipe.transform(this.order.sales_date, 'Y-MM-dd');
     this.order.status = this.order.status ? true : false;
+    this.order.cash = this.payment;
     this.orderService.createSalesOrder(this.order).subscribe({
       next: async (response: any) => {
         const order = await response.data;

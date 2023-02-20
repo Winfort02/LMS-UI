@@ -68,17 +68,11 @@ export class UpdateOrderDetailComponent implements OnInit {
       id: [this.order.id],
       customer_id: [this.order.customer_id, [Validators.required]],
       sales_date: [this.order.sales_date, [Validators.required]],
-      payment_type: [this.order.payment_type, [Validators.required]],
       sales_type: [this.order.sales_type, [Validators.required]],
       order_status: [this.order.order_status, [Validators.required]],
-      payment: [0, [Validators.required]],
-      current_payment: [this.order.payment, [Validators.required]],
-      remaining_balance: [(this.order.total_amount - this.order.payment) > 0 ? (this.order.total_amount - this.order.payment) : 0, [Validators.required]],
       remarks: [this.order.remarks, [Validators.required]],
       status: [this.order.status, [Validators.required]]
     });
-    this.orderForm.controls.current_payment.disable();
-    this.orderForm.controls.remaining_balance.disable();
     this.loadCustomer();
   }
 
@@ -96,7 +90,6 @@ export class UpdateOrderDetailComponent implements OnInit {
           await this.orderForm.patchValue({
             customer_id: this.order.customer_id,
             sales_date: this.order.sales_date,
-            payment_type: this.order.payment_type,
             order_status: this.order.order_status,
             remarks: this.order.remarks,
             status: this.order.status
@@ -128,7 +121,7 @@ export class UpdateOrderDetailComponent implements OnInit {
           this.dialogRef.close({ data: await response.data, code: 201, success: true});
         },
         error: async (error) => {
-          this.dialogRef.close({ data: await error.message, code: error.status, success: false});
+          this.dialogRef.close({ data: await error.error.message, code: error.status, success: false});
           return
         }
       });

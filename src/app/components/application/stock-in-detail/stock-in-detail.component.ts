@@ -107,9 +107,10 @@ export class StockInDetailComponent implements OnInit {
 
 
   loadDetails() {
-    if(this.activatedRoute.snapshot.params.id != 0) {
-      const stock_in_id = this.activatedRoute.snapshot.params.id;
-      this.stock_in_subscription = this.stockInService.getStockInById(stock_in_id).subscribe({
+    const stockInId = parseInt(this.activatedRoute.snapshot.params.id);
+    this.stock_in.id = stockInId;
+    if(this.stock_in.id as number != 0) {
+      this.stock_in_subscription = this.stockInService.getStockInById(stockInId).subscribe({
         next: async(response: any) => {
           const stock_in = response.data;
           if(stock_in !== null) {
@@ -202,25 +203,13 @@ export class StockInDetailComponent implements OnInit {
       this.stock_in.product_id = this.product.id as number;
       this.stock_in.user_id = this.current_user.id as number;
       this.stock_in.date = this.datePipe.transform(this.stock_in.date, 'Y-MM-dd');
-      if(this.activatedRoute.snapshot.params.id == 0) {
+
+      if(this.stock_in.id == 0) {
         this.stockInService.createStockIn(this.stock_in).subscribe({
           next: async (response: any) => {
             this.stock_in = response.data;
-            this.product = this.stock_in.product as ProductModel;
-            this.stock_in_form.patchValue({
-              id: this.stock_in.id,
-              supplier_id: this.stock_in.supplier_id,
-              product_id: this.stock_in.product_id,
-              user_id: this.stock_in.user_id,
-              transaction_number: this.stock_in.transaction_number,
-              van_number: this.stock_in.van_number,
-              date: this.stock_in.date,
-              quantity: this.stock_in.quantity,
-              status: this.stock_in.status
-            });
-            this.location.go(
-              '/application/product/stock-in-detail/' + this.stock_in.id
-            );
+            this.location.go('/application/product/stock-in-detail/' + this.stock_in.id as string);
+            location.reload();
             this.messageService.add({
               severity: 'custom',
               detail: 'Stock added successfully',
@@ -246,7 +235,7 @@ export class StockInDetailComponent implements OnInit {
           }
         })
       } else {
-        const stock_in_id = this.activatedRoute.snapshot.params.id;
+        const stock_in_id = parseInt(this.activatedRoute.snapshot.params.id);
         this.stockInService.updateStockIn(stock_in_id, this.stock_in).subscribe({
           next: async (response: any) => {
             this.messageService.add({

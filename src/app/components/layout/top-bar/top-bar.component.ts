@@ -43,6 +43,7 @@ export class TopBarComponent implements OnInit {
   }
 
   logout() {
+    
     localStorage.clear();
     location.reload();
   }

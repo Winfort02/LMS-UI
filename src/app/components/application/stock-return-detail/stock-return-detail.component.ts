@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
-import { StockInModel } from 'src/app/models/stockIn.model';
 import { SupplierModel } from 'src/app/models/supplier.model';
 import { SupplierService } from 'src/app/services/application/supplier/supplier.service';
 import { ProductQueryComponent } from 'src/app/public/components/product-query/product-query.component';
@@ -11,7 +10,6 @@ import { DatePipe, Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserModel } from 'src/app/models/user.model';
-import { StockInService } from 'src/app/services/application/stock/stock-in.service';
 import { StockReturnModel } from 'src/app/models/stock-return.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { StockReturnService } from 'src/app/services/application/stock/stock-return.service';
@@ -109,9 +107,10 @@ export class StockReturnDetailComponent implements OnInit {
   }
 
   loadDetails() {
-    if(this.activatedRoute.snapshot.params.id != 0) {
-      const stock_return_id = this.activatedRoute.snapshot.params.id;
-      this.stock_return_subscription = this.stockReturnSerivice.getStockReturnById(stock_return_id).subscribe({
+    const stock_id = parseInt(this.activatedRoute.snapshot.params.id);
+    this.stock_return.id = stock_id;
+    if(this.stock_return.id as number != 0) {
+      this.stock_return_subscription = this.stockReturnSerivice.getStockReturnById(stock_id).subscribe({
         next: async(response: any) => {
           const stock_return = response.data;
           if(stock_return !== null) {
@@ -202,34 +201,24 @@ export class StockReturnDetailComponent implements OnInit {
       this.stock_return.product_id = this.product.id as number;
       this.stock_return.user_id = this.current_user.id as number;
       this.stock_return.date = this.datePipe.transform(this.stock_return.date, 'Y-MM-dd');
-      if(this.activatedRoute.snapshot.params.id == 0) {
+
+      if(this.stock_return.id == 0) {
         this.stockReturnSerivice.createStockReturn(this.stock_return).subscribe({
           next: async (response: any) => {
-            this.stock_return = response.data;
-            this.product = this.stock_return.product as ProductModel;
-            this.stock_return_form.patchValue({
-              id: this.stock_return.id,
-              supplier_id: this.stock_return.supplier_id,
-              product_id: this.stock_return.product_id,
-              user_id: this.stock_return.user_id,
-              transaction_number: this.stock_return.transaction_number,
-              van_number: this.stock_return.van_number,
-              date: this.stock_return.date,
-              quantity: this.stock_return.quantity,
-              remarks: this.stock_return.remarks
-            });
-            this.location.go(
-              '/application/product/stock-in-detail/' + this.stock_return.id
-            );
-            this.messageService.add({
-              severity: 'custom',
-              detail: 'Stock added successfully',
-              life: 2000,
-              closable: false,
-              icon: 'pi pi-check-circle text-lg mt-2 text-white',
-              styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
-              contentStyleClass: 'p-2 text-sm'
-            });
+            if(response) {
+              this.stock_return = response.data;
+              this.location.go('/application/product/stock-return-detail/' + this.stock_return.id as string);
+              location.reload();
+              this.messageService.add({
+                severity: 'custom',
+                detail: 'Stock added successfully',
+                life: 2000,
+                closable: false,
+                icon: 'pi pi-check-circle text-lg mt-2 text-white',
+                styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
+                contentStyleClass: 'p-2 text-sm'
+              });
+            }
             
           },
           error: (error) => {
@@ -246,9 +235,11 @@ export class StockReturnDetailComponent implements OnInit {
           }
         })
       } else {
-        const stock_return_id = this.activatedRoute.snapshot.params.id;
+        const stock_return_id = parseInt(this.activatedRoute.snapshot.params.id);
         this.stockReturnSerivice.updateStockReturn(stock_return_id, this.stock_return).subscribe({
           next: async (response: any) => {
+            
+            this.loadDetails();
             this.messageService.add({
               severity: 'custom',
               detail: 'Stock updated successfully',
@@ -258,7 +249,6 @@ export class StockReturnDetailComponent implements OnInit {
               styleClass: 'text-700 bg-teal-700 text-white flex justify-content-start align-items-center pb-2 w-full',
               contentStyleClass: 'p-2 text-sm'
             });
-            this.loadDetails();
           },
           error: (error) => {
             this.messageService.add({

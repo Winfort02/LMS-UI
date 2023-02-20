@@ -20,12 +20,6 @@
             </div>
             <div class="col-12">
               <span class="p-float-label">
-                <p-dropdown [options]="payment_types" formControlName="payment_type" name="payment_type" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.payment_type.touched && orderForm.controls.payment_type.invalid )}" ></p-dropdown>
-                <label for="float-input" class="text-xs">SELECT TYPE OF PAYMENT</label>
-              </span>
-            </div>
-            <div class="col-12">
-              <span class="p-float-label">
                 <p-dropdown [options]="order_statuses" formControlName="order_status" name="order_status" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.order_status.touched && orderForm.controls.order_status.invalid )}" ></p-dropdown>
                 <label for="float-input" class="text-xs">SELECT ORDER STATUS</label>
               </span>
@@ -35,29 +29,6 @@
               <span class="p-float-label">
                 <p-dropdown [options]="sales_type" formControlName="sales_type" name="sales_type" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.sales_type.touched && orderForm.controls.sales_type.invalid )}" ></p-dropdown>
                 <label for="float-input" class="text-xs">SELECT TYPE OF SALES</label>
-              </span>
-            </div>
-
-
-            <div class="col-12">
-              <span class="p-float-label">
-                <input type="text" class="outline-none w-full p-inputtext-sm" formControlName="current_payment" name="current_payment" pInputText /> 
-                <label for="float-input" class="text-xs">CURRENT PAYMENT</label>
-              </span>
-            </div>
-
-            <div class="col-12">
-              <span class="p-float-label">
-                <input type="number" class="outline-none w-full p-inputtext-sm" formControlName="payment" name="payment"
-                [ngClass]="{'ng-invalid ng-dirty' : (orderForm.controls.payment.touched && orderForm.controls.payment.invalid )}"  required pInputText /> 
-                <label for="float-input" class="text-xs">CASH</label>
-              </span>
-            </div>
-
-            <div class="col-12">
-              <span class="p-float-label">
-                <input type="text" class="outline-none w-full p-inputtext-sm" formControlName="remaining_balance" name="remaining_balance" pInputText /> 
-                <label for="float-input" class="text-xs">REMAINING BALANCE</label>
               </span>
             </div>
 

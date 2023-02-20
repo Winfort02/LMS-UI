@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProductModel } from 'src/app/models/product.model';
-import { DatePipe, Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProductSelectionItemsComponent } from 'src/app/public/components/product-selection-items/product-selection-items.component';
@@ -14,7 +13,6 @@ import { OrderModel } from 'src/app/models/order.model';
 import { CustomerModel } from 'src/app/models/customer.model';
 import { Subscription } from 'rxjs';
 import { CustomerService } from 'src/app/services/application/customer/customer.service';
-import { OrderService } from 'src/app/services/application/order/order.service';
 import { UserModel } from 'src/app/models/user.model';
 import { PlaceOrderDetailComponent } from 'src/app/public/components/place-order-detail/place-order-detail.component';
 import { CustomerDetailComponent } from '../customer-detail/customer-detail.component';
@@ -38,36 +36,36 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
   new_customer: CustomerModel = new CustomerModel();
   orderForm: any = FormGroup;
   showOrderItems: boolean = false;
+  isComponentShow: boolean = false;
 
-  sales_type: Array<{label: string, value: string}> = [
-    {label: 'SELECT', value: ''},
-    {label: 'CHARGE', value: 'CHARGE'},
-    {label: 'CASH', value: 'CASH'},
-    {label: 'DELIVERY', value: 'DELIVERY'},
-  ]
+  sales_type: Array<{label: string, value: string, disabled: boolean}> = []
 
   customers: Array<{label: string, value: number}> = [];
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private location: Location,
     private authService: AuthService,
-    private datePipe: DatePipe,
     private formBuilder: FormBuilder,
     private messageService: MessageService,
     private dialogRef: DynamicDialogRef,
     private dialogService: DialogService,
     private orderItemCartService: OrderItemCartService,
     private customerService: CustomerService,
-    private orderService: OrderService,
     private activeRoute: ActivatedRoute
 
   ) { 
     this.current_user = this.authService.currentUser;
+    
   }
 
   ngOnInit(): void {
+    
+  this.sales_type = [
+    {label: 'SELECT', value: '', disabled: false},
+    {label: 'CASH', value: 'CASH', disabled: false},
+    {label: 'CHARGE', value: 'CHARGE', disabled: this.current_user.user_type == 'User' ? true : false},
+    {label: 'DELIVERY', value: 'DELIVERY', disabled: this.current_user.user_type == 'User' ? true : false},
+  ];
     this.orderItemCartService.cart.subscribe((_cart) => {
       this.cart = _cart
       this.dataSource = this.cart.items;
@@ -108,16 +106,18 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
             customer_id: this.customers[0].value
           });
         }
+        this.isComponentShow = true;
          // this.showProductLazyLoad(this.lazyLoad);
       },
       error: (error) => {
+        this.isComponentShow = true;
         this.messageService.add({
           severity: 'custom',
           detail: '' + error.error.message,
           life: 2000,
-closable: false,
- icon: 'pi pi-check-circle text-lg mt-2 text-white',
-          styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+          closable: false,
+          icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+          styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
           contentStyleClass: 'p-2 text-sm'
         })
       }
@@ -137,9 +137,9 @@ closable: false,
             severity: 'custom',
             detail: '' + error.error.message,
             life: 2000,
-closable: false,
- icon: 'pi pi-check-circle text-lg mt-2 text-white',
-            styleClass: 'text-700 bg-red-600 border-y-3 border-white',
+            closable: false,
+            icon: 'pi-exclamation-circle text-lg mt-2 text-white',
+            styleClass: 'text-700 bg-red-700 text-white flex justify-content-start align-items-center pb-2 w-full',
             contentStyleClass: 'p-2 text-sm'
           })
         }
@@ -201,8 +201,8 @@ closable: false,
         severity: 'custom',
         detail: `Product ${item.product_name} has ${item.available_qty} quantity available only`,
         life: 2000,
-closable: false,
- icon: 'pi pi-check-circle text-lg mt-2 text-white',
+        closable: false,
+        icon: 'pi pi-check-circle text-lg mt-2 text-white',
         styleClass: 'text-700 bg-red-600 border-y-3 border-white',
         contentStyleClass: 'p-2 text-sm'
       });
@@ -252,7 +252,8 @@ closable: false,
             this.dialogRef.onClose.subscribe((data: any) => {
               if(data) {
                 if(data.success) {
-                  this.router.navigate(['/application/orders']);
+                  let returnUrl = this.activeRoute.snapshot.queryParamMap.get('returnUrl') || '/application/orders';
+                  this.router.navigateByUrl(returnUrl)
                 }
               } else {
                 return

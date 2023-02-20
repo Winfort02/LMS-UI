@@ -12,7 +12,7 @@ export class StockInModel {
   user?: UserModel;
   transaction_number: string = '0000000000';
   van_number: string = '';
-  date: any;
+  date: any = new Date();
   quantity: number = 0;
   status: boolean = false;
 }

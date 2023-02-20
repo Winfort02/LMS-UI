@@ -22,26 +22,27 @@
         [resizableColumns]="true" styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="scroll">
           <ng-template pTemplate="header">
               <tr class="text-md">
-                  <th pResizableColumn style="width: 5%;">NO</th>
+                  <th pResizableColumn>DATE</th>
                   <th pResizableColumn>SUPPLIER</th>
-                  <th pResizableColumn>PRODUCT</th>
+                  <th pResizableColumn style="max-width: 150px;">PRODUCT</th>
+                  <th pResizableColumn>TRANSACTION #</th>
                   <th pResizableColumn>VAN / DR NUMBER</th>
                   <th pResizableColumn>QUANTITY</th>
-                  <th pResizableColumn>DATE</th>
                   <th pResizableColumn>STATUS</th>
                   <th pResizableColumn>ENCODED BY</th>
-                  <th pResizableColumn style="text-align: center; width: 15%;">ENCODED DATE</th>
-                  <th pResizableColumn style="text-align: center; width: 5%;">DETAIL</th>
+                  <th pResizableColumn style="width: 15%;">ENCODED DATE</th>
+                  <th pResizableColumn style="width: 5%;">DETAIL</th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-stock let-i="rowIndex">
               <tr class="text-sm">
-                  <td> {{ i + 1 }}</td>
+                  
+                  <td>{{stock.date }}</td>
                   <td>{{stock.supplier?.supplier_name | titlecase }}</td>
-                  <td>{{stock.product?.product_name | titlecase }}</td>
+                  <td >{{stock.product?.product_name | titlecase }} {{ stock.product?.description }}</td>
+                  <td>{{stock.transaction_number }}</td>
                   <td>{{stock.van_number }}</td>
                   <td>{{stock.quantity }}</td>
-                  <td>{{stock.date }}</td>
                   <td [ngClass]="{'text-red-600' : !stock.status }" class="text-teal-500">{{stock.status == 1 ? 'Completed' : 'Pending' }}</td>
                   <td>{{stock.user?.name  }}</td>
                   <td>{{stock.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   user: loginModel = new loginModel();
   loginForm: any = FormGroup;
   isLoading: boolean = false;
+  theme: any = localStorage.getItem('theme');
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +29,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginFormValidation();
-    this.themeService.switchTheme('dark');
+    if(this.theme) {
+      let theme = this.theme == 'true' ? 'dark' : 'light';
+      this.themeService.switchTheme(theme);
+    } else {
+      this.themeService.switchTheme('dark');
+    }
+    
   }
 
 
@@ -60,7 +67,7 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             if(this.authService.isLogin()) {
               // location.replace('/application');
-              localStorage.setItem('theme', 'true');
+              localStorage.setItem('theme', this.theme);
               location.reload();
             }
           }, 1000);

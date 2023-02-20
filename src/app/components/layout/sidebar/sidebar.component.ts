@@ -147,7 +147,9 @@ export class SidebarComponent implements OnInit {
         setTimeout(() => {
             this.authService.logout(this.authService.currentUser).subscribe({
               next: async (response: any) => {
-                localStorage.clear();
+                localStorage.removeItem('access-token');
+                localStorage.removeItem('current_user');
+                // localStorage.clear();
                 location.replace('/security/login');
               },
               error: (error) => {
@@ -272,6 +274,22 @@ export class SidebarComponent implements OnInit {
           ]
         },
         {
+          label: 'Payment',
+          icon:'lms-payments-icon',
+          items: [
+              {
+                  label: 'Payments',
+                  icon:'lms-customer-payments-icon',
+                  routerLink: '/application/payments',
+              },
+              {
+                label: 'Payment Reports',
+                icon:'lms-dashboard-report-icon',
+                routerLink: '/application/payments/reports',
+            },
+          ]
+        },
+        {
           label: 'Settings',
           icon: 'lms-settings-icon',
           items: [
@@ -377,7 +395,9 @@ export class SidebarComponent implements OnInit {
             setTimeout(() => {
               this.authService.logout(this.authService.currentUser).subscribe({
                 next: async (response: any) => {
-                  localStorage.clear();
+                  localStorage.removeItem('access-token');
+                  localStorage.removeItem('current_user');
+                  // localStorage.clear();
                   location.replace('/security/login');
                 },
                 error: (error) => {

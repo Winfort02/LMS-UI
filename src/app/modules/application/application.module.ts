@@ -79,6 +79,9 @@ import { PlaceOrderDetailComponent } from 'src/app/public/components/place-order
 import { StockReturnReportComponent } from 'src/app/public/components/stock-return-report/stock-return-report.component';
 import { ChangePasswordComponent } from 'src/app/components/application/change-password/change-password.component';
 import { ResetPasswordComponent } from 'src/app/components/application/reset-password/reset-password.component';
+import { PaymentComponent } from 'src/app/components/application/payment/payment.component';
+import { PaymentDetailComponent } from 'src/app/components/application/payment-detail/payment-detail.component';
+import { CustomerPaymentSummaryReportComponent } from 'src/app/public/components/customer-payment-summary-report/customer-payment-summary-report.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +123,10 @@ import { ResetPasswordComponent } from 'src/app/components/application/reset-pas
     PlaceOrderDetailComponent,
     StockReturnReportComponent,
     ChangePasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    PaymentComponent,
+    PaymentDetailComponent,
+    CustomerPaymentSummaryReportComponent
   ],
   imports: [
     CommonModule,

@@ -11,12 +11,12 @@ export class OrderModel {
   transaction_number: string = '0000000000';
   sales_order_number: string = '';
   sales_date: any = new Date();
-  payment_type: string = '';
   items!: Array<OrderDetailModel>;
+  order_details!: Array<OrderDetailModel>;
   total_amount: number = 0;
-  payment: number = 0;
   order_status: string = '';
   sales_type: string = '';
   remarks: string = '-';
   status: boolean = false;
+  cash?: number;
 }

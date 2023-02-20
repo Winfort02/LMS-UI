@@ -1,0 +1,216 @@
+<div class="container" *ngIf="componentShow">
+  <div class="grid">
+    <div class="col-12 flex flex-column align-items-center justify-content-center w-full gap-3">
+      <div class="col-12 flex flex-row flex-wrap">
+        <div class="col-12 sm:col-5 md:col-5 lg:col-6 xl:col-6 flex justify-content-start align-items-center">
+          <span class="font-bold text-primary"> PAYMENT DETAIL </span>
+        </div>
+        <div class="col-12 sm:col-7 md:col-7 lg:col-6 xl:col-6  flex flex-row justify-content-end align-items-center gap-2">
+          <button pButton class="p-button-sm p-button-raised p-button-success" label="Create Sales Order" (click)="createSalesOrder()" *ngIf="payment.id == 0"></button>
+          <button pButton class="p-button-raised p-button-sm p-button-primary" label="Save" (click)="createPayment()" [disabled]="payment_form.invalid || !order || !payment.status"></button>
+          <button pButton class="p-button-sm p-button-raised p-button-danger" label="Close" (click)="close()"></button>
+        </div>
+      </div>
+      <div class="col-12 surface-hover border-round py-2 px-2 mx-auto">
+        <form [formGroup]="payment_form" class="col-12 flex flex-column align-items-center justify-content-center gap-2">
+          <div class="col-12 flex flex-column sm:flex-row md:flex-row lg:flex-row xl:flex-row align-items-center justify-content-start flex-wrap row-gap-3">
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <p-dropdown [options]="orders" formControlName="order_id" name="order_id" [filter]="true" filterBy="label" (onChange)="selectedOrder($event)" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (payment_form.controls.order_id.touched && payment_form.controls.order_id.invalid )}" ></p-dropdown>
+                <label for="float-input" class="text-xs">SELECT SALES ORDER NUMBER</label>
+              </span>
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <input type="text" formControlName="amount" name="amount" [ngClass]="{'ng-invalid ng-dirty' : (payment_form.controls.amount.touched && payment_form.controls.amount.invalid )}" class="p-inputtext-sm outline-none w-full text-red-500 font-bold" required pInputText /> 
+                <label for="float-input" class="text-xs">CURRENT PAYMENT</label>
+              </span>
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <input type="text" formControlName="current_amount" name="current_amount" [ngClass]="{'ng-invalid ng-dirty' : (payment_form.controls.current_amount.touched && payment_form.controls.current_amount.invalid )}" class="p-inputtext-sm outline-none w-full text-red-500 font-bold" required pInputText /> 
+                <label for="float-input" class="text-xs">AMOUNT</label>
+              </span>
+            </div>
+          
+
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <input type="text" formControlName="balance" name="balance" [ngClass]="{'ng-invalid ng-dirty' : (payment_form.controls.balance.touched && payment_form.controls.balance.invalid )}" class="p-inputtext-sm outline-none w-full text-red-500 font-bold" required pInputText /> 
+                <label for="float-input" class="text-xs">BALANCE</label>
+              </span>
+            </div>
+
+            
+          </div>
+
+          <div class="col-12 flex flex-column sm:flex-row md:flex-row lg:flex-row xl:flex-row align-items-center justify-content-start flex-wrap row-gap-3">
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <p-dropdown [options]="payment_types" formControlName="payment_type" name="payment_type" [filter]="true" filterBy="label" optionLabel="label" optionValue="value" styleClass="w-full p-inputtext-sm" [ngClass]="{'ng-invalid ng-dirty' : (payment_form.controls.payment_type.touched && payment_form.controls.payment_type.invalid )}" ></p-dropdown>
+                <label for="float-input" class="text-xs">SELECT PAYMENT TYPE</label>
+              </span>
+            </div>
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <p-calendar inputId="basic" formControlName="payment_date" name="payment_date"
+                  styleClass="p-inputtext-sm w-full" dateFormat="yy-mm-dd" [ngClass]="{'ng-invalid ng-dirty' : (payment_form.controls.payment_date.touched && payment_form.controls.payment_date.invalid )}"></p-calendar>
+                  <label for="float-input" class="text-xs">PAYMENT DATE</label>
+              </span>
+            </div>
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <span class="p-float-label">
+                <input type="text" formControlName="remarks" name="remarks" [ngClass]="{'ng-invalid ng-dirty' : (payment_form.controls.remarks.touched && payment_form.controls.remarks.invalid )}" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs">REMARKS</label>
+              </span>
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-6 lg:col-3 xl:col-3">
+              <p-checkbox formControlName="status" name="status" [binary]="true" inputId="binary"></p-checkbox>
+              <label for="binary" class="p-1 text-green-500" [ngClass]="{'text-red-500' : !payment_form.value.status}"> {{ payment_form.value.status == true ? 'ACTIVE' : 'CANCEL' }}</label> 
+            </div>
+
+            
+          </div>
+        </form>
+      </div>
+
+      <div class="col-12 surface-hover border-round py-2 px-2 mx-auto" *ngIf="showDetails">
+        <div class="col-12 flex flex-column justify-content-center align-items-start gap-3">
+          <div class="col-12">
+            <label for=""> SALES ORDER INFORMATION </label>
+          </div>
+
+          <hr />
+
+          <div class="col-12 flex flex-row justify-content-start align-items-center">
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="order.sales_date " [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> SALES ORDER DATE </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="order.total_amount | currency:'P ' " [disabled]="true" class="p-inputtext-sm outline-none w-full text-red-500 font-bold" required pInputText /> 
+                <label for="float-input" class="text-xs"> DUE AMOUNT </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="order.sales_type" [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> SALES TYPE </label>
+              </span>
+            </div>
+
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="order.order_details.length" [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> TOTAL NUMBER OF ITEMS </label>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12 flex flex-row justify-content-start align-items-center">
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="order.customer.customer_name " [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> CUSTOMER NAME </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="order.customer.phone_number" [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> CONTACT NUMBER </label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="order.customer.address" [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> ADDRESS</label>
+              </span>
+            </div>
+            <div class="col-3">
+              <span class="p-float-label">
+                <input type="text" name="transaction_number" [value]="order.customer.email" [disabled]="true" class="p-inputtext-sm outline-none w-full" required pInputText /> 
+                <label for="float-input" class="text-xs"> EMAIL</label>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12 flex flex-row justify-content-start align-items-center">
+            <div class="col-3">
+              <label class="text-sm"> TRANSACTION # : <span class="text-red-500 uppercase"> {{ order.transaction_number }}</span></label>
+            </div>
+            <div class="col-3">
+              <label class="text-sm"> ORDER STATUS : <span class="text-teal-500 uppercase" [ngClass]="{'text-red-500' : order.order_status == 'Cancel'}"> {{ order.order_status }}</span></label>
+            </div>
+          </div>
+          <div class="col-12 flex flex-row justify-content-start align-items-center">
+            <div class="w-full">
+              <p-table [value]="order.order_details" responsiveLayout="scroll" styleClass=" p-datatable-sm p-datatable-gridlines">
+                <ng-template pTemplate="header">
+                    <tr class="text-xs sm:text-xs md:text-sm lg:text-sm lg:text-sm">
+                        <th>PRODUCT NAME</th>
+                        <th>QUANTITY</th>
+                        <th>PRICE</th>
+                        <th>SUB TOTAL</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr class="text-xs sm:text-xs md:text-sm lg:text-sm lg:text-sm">
+                        <td>{{product.product.product_name }}</td>
+                        <td>{{product.quantity }}</td>
+                        <td>{{product.price }}</td>
+                        <td>{{product.sub_total }}</td>
+                    </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 py-2 px-2 mx-auto" *ngIf="payment_history.length">
+        <div class="col-12 flex flex-column justify-content-center align-items-start gap-3">
+          <div class="col-12">
+            <label for=""> PAYMENT HISTORY </label>
+          </div>
+
+          <div class="col-12 flex flex-row justify-content-start align-items-center">
+            <div class="w-full">
+              <p-table [value]="payment_history" responsiveLayout="scroll" styleClass=" p-datatable-sm p-datatable-gridlines">
+                <ng-template pTemplate="header">
+                    <tr class="text-xs sm:text-xs md:text-sm lg:text-sm lg:text-sm">
+                        <th>DATE</th>
+                        <th>SO NUMBER</th>
+                        <th>DUE AMOUNT</th>
+                        <th>AMOUNT</th>
+                        <th>BALANCE</th>
+                        <th style="max-width: 50px;">ENCODED BY</th>
+                        <th style="max-width: 100px;">ENCODED DATE</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-payment let-i="rowIndex">
+                    <tr class="text-xs sm:text-xs md:text-sm lg:text-sm lg:text-sm" [ngClass]="{'bg-red-500 text-white' : !payment.payment.status }">
+                        <td>{{payment.date }}</td>
+                        <td>{{payment.payment.order.sales_order_number }}</td>
+                        <td class="text-right">{{
+                          (i == this.lastIndex) ? 
+                          (payment.payment.due_amount | currency: 'P ')
+                          :
+                          (payment.payment.due_amount - (payment.current_payment - payment.previous_payment)) > 0 ?  (payment.payment.due_amount - (payment.previous_payment - payment.current_payment)| currency: 'P ') : 0 | currency: 'P '}}</td>
+                        <td class="text-right">{{payment.current_payment | currency: 'P ' }}</td>
+                        <td class="text-right">{{ (payment.payment.due_amount - payment.previous_payment) > 0 ? (payment.payment.due_amount - payment.previous_payment | currency: 'P ') : 0 | currency:'P ' }}</td>
+                        <td style="max-width: 50px;">{{payment.user.name }}</td>
+                        <td style="max-width: 100px;">{{payment.created_at | date: 'EEEE - MMMM d, y h:mm a' }}</td>
+                    </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </div>
